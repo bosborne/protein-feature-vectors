@@ -9,7 +9,6 @@ This package is based on [iFeatureOmega-CLI](https://github.com/Superzchen/iFeat
 - It only makes feature vectors using protein sequence (not based on DNA, RNA, chemical structures, and so on)
 - The feature vectors are all fixed-length, suitable for supervised learning
 - It has fewer dependencies than iFeatureOmega-CLI
-- It can be installed at the command line
 - It just creates feature vectors and has no other plotting or analytical capabilities
 
 ## Installation
