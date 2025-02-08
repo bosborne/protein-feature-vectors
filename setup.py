@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="protein-feature-vectors",
     version="1.0",
-    keywords="protein-feature-vectors",
+    keywords="protein sequence, feature vectors, bioinformatics",
     description="Code to produce fixed-length feature vectors from protein sequences based on iFeatureOmega",
     license="MIT License",
     url="https://github.com/bosborne/protein-feature-vectors",
@@ -25,7 +25,6 @@ setup(
     install_requires=[
         "numpy>=1.21.4",
         "pandas>=1.3.4",
-        "scipy>=1.7.3",
         "biopython>=1.6",
     ],
 )
