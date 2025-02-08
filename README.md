@@ -6,8 +6,8 @@ Code to produce fixed-length feature vectors from protein sequences.
 
 This package is based on [iFeatureOmega-CLI](https://github.com/Superzchen/iFeatureOmega-CLI), with the following differences:
 
-- It only makes feature vectors using protein sequence (not based on DNA, RNA, chemical structures, and so on)
-- The feature vectors are all fixed-length, suitable for supervised learning
+- It only makes feature vectors using protein sequence (not based on DNA, RNA, or chemical structures)
+- The feature vectors are all fixed-length
 - It has fewer dependencies than iFeatureOmega-CLI
 - It just creates feature vectors and has no other plotting or analytical capabilities
 
