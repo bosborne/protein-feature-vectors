@@ -1,0 +1,195 @@
+{
+	"CKSAAP": {
+		"kspace": 3
+	},
+	"CKSAAGP": {
+		"kspace": 3
+	},
+	"AAIndex": {
+		"aaindex": "ANDN920101;ARGP820101;ARGP820102;ARGP820103;BEGF750101;BEGF750102;BEGF750103;BHAR880101"
+	},
+	"NMBroto": {
+		"aaindex": "ANDN920101;ARGP820101;ARGP820102;ARGP820103;BEGF750101;BEGF750102;BEGF750103;BHAR880101",
+		"nlag": 3
+	},
+	"Moran": {
+		"aaindex": "ANDN920101;ARGP820101;ARGP820102;ARGP820103;BEGF750101;BEGF750102;BEGF750103;BHAR880101",
+		"nlag": 3
+	},
+	"KSCTriad": {
+		"kspace": 3
+	},
+	"QSOrder": {
+		"nlag": 3,
+		"weight": 0.05
+	},
+	"PAAC": {
+		"weight": 0.05,
+		"lambdaValue": 3
+	},
+	"APAAC": {
+		"weight": 0.05,
+		"lambdaValue": 3
+	},
+	"DistancePair": {
+		"distance": 0,
+		"cp": "cp(20)"
+	},
+	"AC": {
+		"aaindex": "ANDN920101;ARGP820101;ARGP820102;ARGP820103;BEGF750101;BEGF750102;BEGF750103;BHAR880101",
+		"nlag": 3
+	},
+	"CC": {
+		"aaindex": "ANDN920101;ARGP820101;ARGP820102;ARGP820103;BEGF750101;BEGF750102;BEGF750103;BHAR880101",
+		"nlag": 3
+	},
+	"ACC": {
+		"aaindex": "ANDN920101;ARGP820101;ARGP820102;ARGP820103;BEGF750101;BEGF750102;BEGF750103;BHAR880101",
+		"nlag": 3
+	},
+	"CKSAAP_type_1": {
+		"kspace": 3
+	},
+	"CKSAAP_type_2": {
+		"kspace": 3
+	},
+	"CKSAAGP_type_1": {
+		"kspace": 3
+	},
+	"CKSAAGP_type_2": {
+		"kspace": 3
+	},
+	"Geary": {
+		"aaindex": "ANDN920101;ARGP820101;ARGP820102;ARGP820103;BEGF750101;BEGF750102;BEGF750103;BHAR880101",
+		"nlag": 3
+	},
+	"SOCNumber": {
+		"nlag": 3
+	},
+	"PseKRAAC_type_1": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_2": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_3A": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_3B": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_4": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 5
+	},
+	"PseKRAAC_type_5": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 3
+	},
+	"PseKRAAC_type_6A": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 4
+	},
+	"PseKRAAC_type_6B": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 5
+	},
+	"PseKRAAC_type_6C": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 5
+	},
+	"PseKRAAC_type_7": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_8": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_10": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_11": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_12": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_13": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 4
+	},
+	"PseKRAAC_type_14": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_15": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
+	"PseKRAAC_type_16": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	}
+}
