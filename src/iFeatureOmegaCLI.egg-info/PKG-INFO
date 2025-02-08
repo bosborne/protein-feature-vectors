@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: iFeatureOmegaCLI
+Version: 1.0.2
+Summary: An integrative platform for the prediction/feature engineering, visualization and analysis of features from molecular sequence, structural and ligand data sets
+Home-page: https://github.com/bosborne/iFeatureOmega-CLI
+Author: SuperZhen
+Author-email: chenzhen-win2009@163.com
+License: MIT License
+Description: UNKNOWN
+Keywords: iFeatureOmegaCLI
+Platform: any
