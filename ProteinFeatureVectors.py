@@ -9,12 +9,12 @@ from collections import Counter
 from Bio.SeqIO.FastaIO import FastaIterator
 
 
-class Protein:
+class Calculator:
     """
-    >>> from ProteinFeatureVectors import Protein
+    >>> from ProteinFeatureVectors import Calculator
 
     # create a instance
-    >>> proteins = Protein()
+    >>> proteins = Calculator()
 
     # display available methods
     >>> proteins.display_feature_types()
