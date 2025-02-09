@@ -24,7 +24,7 @@ This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/i
 ```python
   $ python3
   >>> from ProteinFeatureVectors import Protein
-  >>> proteins = Protein('data_examples/multi.fa')
+  >>> proteins = Protein(file='data_examples/multi.fa')
   >>> proteins.display_feature_types()
   >>> proteins.get_feature_vectors("CTriad")
   >>> print(proteins.encodings)

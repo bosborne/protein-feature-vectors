@@ -14,7 +14,7 @@ class Protein:
     >>> from ProteinFeatureVectors import Protein
 
     # create a instance
-    >>> proteins = Protein("./data_examples/multi.fa")
+    >>> proteins = Protein(file="./data_examples/multi.fa")
 
     # display available feature descriptor methods
     >>> proteins.display_feature_types()
