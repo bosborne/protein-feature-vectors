@@ -1,6 +1,6 @@
 # *protein-feature-vectors*
 
-Code to produce fixed-length feature vectors from protein sequences.
+Code to produce fixed-length feature vectors from protein sequences based on iFeatureOmega.
 
 ## Introduction
 
@@ -24,8 +24,8 @@ This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/i
 ```python
   $ python3
   >>> from ProteinFeatureVectors import Protein
-  >>> proteins.display_feature_types()
   >>> proteins = Protein('data_examples/multi.fa')
+  >>> proteins.display_feature_types()
   >>> proteins.get_feature_vectors("CTriad")
   >>> print(proteins.encodings)
 ```
@@ -83,4 +83,4 @@ This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/i
 | PseKRAAC_type_13 | Pseudo K-tuple reduced amino acids composition type 13 |   |
 | PseKRAAC_type_14 | Pseudo K-tuple reduced amino acids composition type 14 |   |
 | PseKRAAC_type_15 | Pseudo K-tuple reduced amino acids composition type 15 |   |
-| PseKRAAC_type_16 | Pseudo K-tuple reduced amino acids composition type 16
+| PseKRAAC_type_16 | Pseudo K-tuple reduced amino acids composition type 16 |   |

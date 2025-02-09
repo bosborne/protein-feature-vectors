@@ -6,7 +6,7 @@ sys.path.insert(0, srcdir)
 
 from ProteinFeatureVectors import Protein  # noqa: E402
 
-proteins = Protein(f"{srcdir}/data_examples/multi.fa")
+proteins = Protein(file=f"{srcdir}/data_examples/multi.fa")
 proteins.display_feature_types()
 proteins.get_feature_vectors("CTriad")
 print(proteins.encodings)

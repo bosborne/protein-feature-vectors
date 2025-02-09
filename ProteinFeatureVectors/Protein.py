@@ -30,7 +30,7 @@ class Protein:
     >>> protein.to_csv("AAC.csv", "index=False", header=False)
     """
 
-    def __init__(self, file):
+    def __init__(self, file=None):
 
         self.import_parameters("Protein_parameters_setting.json")
         self.__default_para = {
@@ -101,9 +101,10 @@ class Protein:
 
         self.minimum_length_without_minus = 1
         self.maximum_length_without_minus = 0
-        self.file = file
-        self.read_fasta()
-        self.sequence_number = len(self.fasta_list)
+        if file is not None:
+            self.file = file
+            self.read_fasta()
+            self.sequence_number = len(self.fasta_list)
 
         """
         >>>protein.fasta_list
