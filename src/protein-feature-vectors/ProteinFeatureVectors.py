@@ -60,6 +60,7 @@ class Protein:
             "GDPC_type_1": "self._GDPC(normalized=True)",
             "GDPC_type_2": "self._GDPC(normalized=False)",
             "GTPC_type_1": "self._GTPC(normalized=True)",
+            "GTPC_type_2": "self._GTPC(normalized=False)",
             "NMBroto": "self._NMBroto()",
             "Moran": "self._Moran()",
             "Geary": "self._Geary()",
@@ -88,6 +89,7 @@ class Protein:
             "PseKRAAC_type_6C": "self._PseKRAAC_type_6C()",
             "PseKRAAC_type_7": "self._PseKRAAC_type_7()",
             "PseKRAAC_type_8": "self._PseKRAAC_type_8()",
+            "PseKRAAC_type_9": "self._PseKRAAC_type_9()",
             "PseKRAAC_type_10": "self._PseKRAAC_type_10()",
             "PseKRAAC_type_11": "self._PseKRAAC_type_11()",
             "PseKRAAC_type_12": "self._PseKRAAC_type_12()",
@@ -171,6 +173,7 @@ class Protein:
         GDPC_type_1                                        Grouped dipeptide composition type 1 - normalized
         GDPC_type_2                                        Grouped dipeptide composition type 2 - raw count
         GTPC_type_1                                        Grouped tripeptide composition type 1 - normalized
+        GTPC_type_2                                        Grouped tripeptide composition type 1 - raw count
         Moran                                              Moran
         Geary                                              Geary
         NMBroto                                            Normalized Moreau-Broto
@@ -192,6 +195,7 @@ class Protein:
         PseKRAAC_type_6C                                   Pseudo K-tuple reduced amino acids composition type 6C
         PseKRAAC_type_7                                    Pseudo K-tuple reduced amino acids composition type 7
         PseKRAAC_type_8                                    Pseudo K-tuple reduced amino acids composition type 8
+        PseKRAAC_type_9                                    Pseudo K-tuple reduced amino acids composition type 9
         PseKRAAC_type_10                                   Pseudo K-tuple reduced amino acids composition type 10
         PseKRAAC_type_11                                   Pseudo K-tuple reduced amino acids composition type 11
         PseKRAAC_type_12                                   Pseudo K-tuple reduced amino acids composition type 12
