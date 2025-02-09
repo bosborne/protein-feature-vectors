@@ -53,8 +53,8 @@ This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/i
 - GDPC_type_2                                        Grouped dipeptide composition type 2 - raw count
 - GTPC_type_1                                        Grouped tripeptide composition type 1 - normalized
 - GTPC_type_2                                        Grouped tripeptide composition type 1 - raw count
-- Moran                                              Moran
-- Geary                                              Geary
+- Moran                                              Spatial autocorrelation of physicochemical properties
+- Geary                                              Spatial autocorrelation of physicochemical properties
 - NMBroto                                            Normalized Moreau-Broto
 - AC                                                 Auto covariance
 - CC                                                 Cross covariance
