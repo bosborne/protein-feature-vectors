@@ -143,6 +143,13 @@
 		"k-tuple": 2,
 		"RAAC_clust": 2
 	},
+	"PseKRAAC_type_9": {
+		"lambdaValue": 3,
+		"PseKRAAC_model": "g-gap",
+		"g-gap": 2,
+		"k-tuple": 2,
+		"RAAC_clust": 2
+	},
 	"PseKRAAC_type_10": {
 		"lambdaValue": 3,
 		"PseKRAAC_model": "g-gap",
