@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "ProteinFeatureVectors"
+version = "1.0"
+description = "Code to produce fixed-length feature vectors from protein sequences based on iFeatureOmega"
+authors = ["Brian Osborne <briano@bioteam.net>"]
+readme = "README.md"
+packages = [{ include = "ProteinFeatureVectors" }]
+include = [
+    "ProteinFeatureVectors/Protein.py",
+    "ProteinFeatureVectors/Protein_parameters_setting.json",
+    "ProteinFeatureVectors/data_examples/*",
+    "ProteinFeatureVectors/data/*",
+    "ProteinFeatureVectors/test/test.py",
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.20.0"
+biopython = "^1.6"
+pandas = "^1.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+your-command = "ProteinFeatureVectors.ProteinFeatureVectors:main"
