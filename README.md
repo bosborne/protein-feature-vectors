@@ -28,7 +28,7 @@ This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/i
   >>> proteins.display_feature_types()
   >>> proteins.get_feature_vectors("CTriad")
   >>> print(proteins.encodings)
-  >>> proteins.to_csv("AAC.csv", "index=False", header=False)
+  >>> proteins.to_csv("CTriad.csv", "index=False", header=False)
 ```
 
 ## Feature Vectors
