@@ -1,15 +1,16 @@
 [tool.poetry]
-name = "ProteinFeatureVectors"
+name = "protein-feature-vectors"
 version = "1.0"
 description = "Code to produce fixed-length feature vectors from protein sequences based on iFeatureOmega"
 authors = ["Brian Osborne <briano@bioteam.net>"]
 readme = "README.md"
-packages = [{ include = "ProteinFeatureVectors.py" }]
+packages = [{ include = "protein-feature-vectors" }]
 include = [
-    "Protein_parameters_setting.json",
-    "data_examples/*",
-    "data/*",
-    "test/test.py",
+    "protein-feature-vectors/ProteinFeatureVectors.py",
+    "protein-feature-vectors/Protein_parameters_setting.json",
+    "protein-feature-vectors/data_examples/*",
+    "protein-feature-vectors/data/*",
+    "protein-feature-vectors/test/test.py",
 ]
 
 [tool.poetry.dependencies]
