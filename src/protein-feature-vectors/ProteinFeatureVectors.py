@@ -1163,6 +1163,7 @@ class Protein:
                             ) / (L - lag)
                         except Exception as e:
                             ac = 0
+                            print(f"Error: {e}")
                         code.append(ac)
                 encodings.append(code)
             encodings = np.array(encodings)
@@ -1262,6 +1263,7 @@ class Protein:
                             ) / (L - lag)
                         except Exception as e:
                             cc = 0
+                            print(f"Error: {e}")
                         code.append(cc)
                 encodings.append(code)
             encodings = np.array(encodings)
@@ -1354,6 +1356,7 @@ class Protein:
                                 ]
                             ) / (L - lag)
                         except Exception as e:
+                            print(f"Error: {e}")
                             ac = 0
                         code.append(ac)
                 for pair in property_pairs:
@@ -1396,6 +1399,7 @@ class Protein:
                                 ]
                             ) / (L - lag)
                         except Exception as e:
+                            print(f"Error: {e}")
                             cc = 0
                         code.append(cc)
                 encodings.append(code)
