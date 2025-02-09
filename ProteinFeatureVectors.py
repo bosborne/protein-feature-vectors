@@ -11,26 +11,27 @@ from Bio.SeqIO.FastaIO import FastaIterator
 
 class Protein:
     """
-    # Running examples:
-    >>> import ProteinFeatureVectors
+    >>> from ProteinFeatureVectors import Protein
 
     # create a instance
-    >>> protein = ProteinFeatureVectors.Protein("./data_examples/multi.fa")
+    >>> proteins = Protein("./data_examples/multi.fa")
 
     # display available feature descriptor methods
-    >>> protein.display_feature_types()
+    >>> proteins.display_feature_types()
 
     # calculate feature vectors
-    >>> protein.get_feature_vectors("AAC")
+    >>> proteins.get_feature_vectors("AAC")
 
     # display the feature vectors
-    >>> print(protein.encodings)
+    >>> print(proteins.encodings)
 
-    # save feature descriptors
-    >>> protein.to_csv("AAC.csv", "index=False", header=False)
+    # save feature vectors
+    >>> proteins.to_csv("AAC.csv", "index=False", header=False)
     """
 
     def __init__(self, file=None):
+        self.encodings = None  # pandas dataframe
+        self.fasta_list = None
 
         self.import_parameters("Protein_parameters_setting.json")
         self.__default_para = {
@@ -44,7 +45,6 @@ class Protein:
             "k-tuple": 2,
             "RAAC_clust": 1,
         }
-        self.encodings = None  # pandas dataframe
         self.__cmd_dict = {
             "AAC": "self._AAC()",
             "CKSAAP_type_1": "self._CKSAAP(normalized=True)",
@@ -139,6 +139,8 @@ class Protein:
                 sys.exit(f"Parameter file parser error: {e}")
 
     def get_feature_vectors(self, descriptor):
+        if self.fasta_list is None:
+            sys.exit("No sequence supplied")
         # copy parameters
         if descriptor in self.__default_para_dict:
             for key in self.__default_para_dict[descriptor]:
