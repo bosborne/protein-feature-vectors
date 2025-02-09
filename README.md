@@ -46,53 +46,53 @@ print(proteins.encodings)
 
 | Name | Description | Length |
 |------|-------------|--------|
-| AAC | Amino acid composition |   |
-| CKSAAP_type_1 | Composition of k-spaced amino acid pairs type 1 - normalized |   |
-| CKSAAP_type_2 | Composition of k-spaced amino acid pairs type 2 - raw count |   |
-| DPC_type_1 | Dipeptide composition type 1 - normalized |   |
-| DPC_type_2 | Dipeptide composition type 2 - raw count |   |
-| TPC_type_1 | Tripeptide composition type 1 - normalized |   |
-| TPC_type_2 | Tripeptide composition type 1 - raw count |   |
-| CTDC | Composition |   |
-| CTDT | Transition |   |
-| CTDD | Distribution |   |
-| CTriad | Conjoint triad |   |
-| KSCTriad | Conjoint k-spaced triad |   |
-| ASDC | Adaptive skip dipeptide composition |   |
-| DistancePair | PseAAC of distance-pairs and reduced alphabe |   |
-| GAAC | Grouped amino acid composition |   |
-| CKSAAGP_type_1 | Composition of k-spaced amino acid group pairs type 1- normalized |   |
-| CKSAAGP_type_2 | Composition of k-spaced amino acid group pairs type 2- raw count |   |
-| GDPC_type_1 | Grouped dipeptide composition type 1 - normalized |   |
-| GDPC_type_2 | Grouped dipeptide composition type 2 - raw count |   |
-| GTPC_type_1 | Grouped tripeptide composition type 1 - normalized |   |
-| GTPC_type_2 | Grouped tripeptide composition type 1 - raw count |   |
-| Moran | Spatial autocorrelation of physicochemical properties |   |
-| Geary | Spatial autocorrelation of physicochemical properties |   |
-| NMBroto | Normalized Moreau-Broto |   |
-| AC | Auto covariance |   |
-| CC | Cross covariance |   |
-| ACC | Auto-cross covariance |   |
-| SOCNumber | Sequence-order-coupling number |   |
-| QSOrder | Quasi-sequence-order descriptors |   |
-| PAAC | Pseudo-amino acid composition |   |
-| APAAC | Amphiphilic PAAC |   |
-| PseKRAAC_type_1 | Pseudo K-tuple reduced amino acids composition type 1 |   |
-| PseKRAAC_type_2 | Pseudo K-tuple reduced amino acids composition type 2 |   |
-| PseKRAAC_type_3A | Pseudo K-tuple reduced amino acids composition type 3A |   |
-| PseKRAAC_type_3B | Pseudo K-tuple reduced amino acids composition type 3B |   |
-| PseKRAAC_type_4 | Pseudo K-tuple reduced amino acids composition type 4 |   |
-| PseKRAAC_type_5 | Pseudo K-tuple reduced amino acids composition type 5 |   |
-| PseKRAAC_type_6A | Pseudo K-tuple reduced amino acids composition type 6A |   |
-| PseKRAAC_type_6B | Pseudo K-tuple reduced amino acids composition type 6B |   |
-| PseKRAAC_type_6C | Pseudo K-tuple reduced amino acids composition type 6C |   |
-| PseKRAAC_type_7 | Pseudo K-tuple reduced amino acids composition type 7 |   |
-| PseKRAAC_type_8 | Pseudo K-tuple reduced amino acids composition type 8 |   |
-| PseKRAAC_type_9 | Pseudo K-tuple reduced amino acids composition type 9 |   |
-| PseKRAAC_type_10 | Pseudo K-tuple reduced amino acids composition type 10 |   |
-| PseKRAAC_type_11 | Pseudo K-tuple reduced amino acids composition type 11 |   |
-| PseKRAAC_type_12 | Pseudo K-tuple reduced amino acids composition type 12 |   |
-| PseKRAAC_type_13 | Pseudo K-tuple reduced amino acids composition type 13 |   |
-| PseKRAAC_type_14 | Pseudo K-tuple reduced amino acids composition type 14 |   |
-| PseKRAAC_type_15 | Pseudo K-tuple reduced amino acids composition type 15 |   |
-| PseKRAAC_type_16 | Pseudo K-tuple reduced amino acids composition type 16 |   |
+| AAC | Amino acid composition | 20 |
+| CKSAAP_type_1 | Composition of k-spaced amino acid pairs type 1 - normalized | 1600 |
+| CKSAAP_type_2 | Composition of k-spaced amino acid pairs type 2 - raw count | 1600 |
+| DPC_type_1 | Dipeptide composition type 1 - normalized | 400 |
+| DPC_type_2 | Dipeptide composition type 2 - raw count | 400 |
+| TPC_type_1 | Tripeptide composition type 1 - normalized | 8000  |
+| TPC_type_2 | Tripeptide composition type 1 - raw count | 8000  |
+| CTDC | Composition | 39 |
+| CTDT | Transition | 39 |
+| CTDD | Distribution | 195 |
+| CTriad | Conjoint triad | 343 |
+| KSCTriad | Conjoint k-spaced triad | 1372 |
+| ASDC | Adaptive skip dipeptide composition | 400 |
+| DistancePair | PseAAC of distance-pairs and reduced alphabe | 20 |
+| GAAC | Grouped amino acid composition | 5 |
+| CKSAAGP_type_1 | Composition of k-spaced amino acid group pairs type 1- normalized | 100 |
+| CKSAAGP_type_2 | Composition of k-spaced amino acid group pairs type 2- raw count | 100 |
+| GDPC_type_1 | Grouped dipeptide composition type 1 - normalized | 25 |
+| GDPC_type_2 | Grouped dipeptide composition type 2 - raw count | 25 |
+| GTPC_type_1 | Grouped tripeptide composition type 1 - normalized | 125 |
+| GTPC_type_2 | Grouped tripeptide composition type 1 - raw count | 125 |
+| Moran | Spatial autocorrelation of physicochemical properties | 24 |
+| Geary | Spatial autocorrelation of physicochemical properties | 24 |
+| NMBroto | Normalized Moreau-Broto | 24 |
+| AC | Auto covariance | 24 |
+| CC | Cross covariance | 168 |
+| ACC | Auto-cross covariance | 192 |
+| SOCNumber | Sequence-order-coupling number | 6 |
+| QSOrder | Quasi-sequence-order descriptors | 46 |
+| PAAC | Pseudo-amino acid composition | 23 |
+| APAAC | Amphiphilic PAAC | 26 |
+| PseKRAAC_type_1 | Pseudo K-tuple reduced amino acids composition type 1 | 4 |
+| PseKRAAC_type_2 | Pseudo K-tuple reduced amino acids composition type 2 | 4 |
+| PseKRAAC_type_3A | Pseudo K-tuple reduced amino acids composition type 3A | 4 |
+| PseKRAAC_type_3B | Pseudo K-tuple reduced amino acids composition type 3B | 4 |
+| PseKRAAC_type_4 | Pseudo K-tuple reduced amino acids composition type 4 | 25 |
+| PseKRAAC_type_5 | Pseudo K-tuple reduced amino acids composition type 5 | 9 |
+| PseKRAAC_type_6A | Pseudo K-tuple reduced amino acids composition type 6A | 16 |
+| PseKRAAC_type_6B | Pseudo K-tuple reduced amino acids composition type 6B | 25 |
+| PseKRAAC_type_6C | Pseudo K-tuple reduced amino acids composition type 6C | 25 |
+| PseKRAAC_type_7 | Pseudo K-tuple reduced amino acids composition type 7 | 4 |
+| PseKRAAC_type_8 | Pseudo K-tuple reduced amino acids composition type 8 | 4 |
+| PseKRAAC_type_9 | Pseudo K-tuple reduced amino acids composition type 9 | 4 |
+| PseKRAAC_type_10 | Pseudo K-tuple reduced amino acids composition type 10 | 4 |
+| PseKRAAC_type_11 | Pseudo K-tuple reduced amino acids composition type 11 | 4 |
+| PseKRAAC_type_12 | Pseudo K-tuple reduced amino acids composition type 12 | 4 |
+| PseKRAAC_type_13 | Pseudo K-tuple reduced amino acids composition type 13 | 16 |
+| PseKRAAC_type_14 | Pseudo K-tuple reduced amino acids composition type 14 | 4 |
+| PseKRAAC_type_15 | Pseudo K-tuple reduced amino acids composition type 15 | 4 |
+| PseKRAAC_type_16 | Pseudo K-tuple reduced amino acids composition type 16 | 4 |

@@ -14,13 +14,13 @@ class Protein:
     >>> from ProteinFeatureVectors import Protein
 
     # create a instance
-    >>> proteins = Protein(file="./data_examples/multi.fa")
+    >>> proteins = Protein()
 
-    # display available feature descriptor methods
+    # display available methods
     >>> proteins.display_feature_types()
 
     # calculate feature vectors
-    >>> proteins.get_feature_vectors("AAC")
+    >>> proteins.get_feature_vectors("AAC", file="./data_examples/multi.fa")
 
     # display the feature vectors
     >>> print(proteins.encodings)
@@ -143,7 +143,7 @@ class Protein:
             Name of feature vector
         file : sequence file name, optional
             Fasta file name
-        dict : tuple, optional
+        pdict : dict, optional
             Key is an id, value is a sequence string
         """
         if file is not None:
@@ -153,7 +153,6 @@ class Protein:
             self.fasta_list = [
                 [id, sequence] for id, sequence in pdict.items()
             ]
-
         elif self.fasta_list is None:
             sys.exit("No sequence supplied")
 
