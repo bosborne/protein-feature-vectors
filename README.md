@@ -21,14 +21,25 @@ This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/i
 
 ## Usage
 
+Sequences from a Fasta file:
+
 ```python
-  $ python3
-  >>> from ProteinFeatureVectors import Protein
-  >>> proteins = Protein(file='data_examples/multi.fa')
-  >>> proteins.display_feature_types()
-  >>> proteins.get_feature_vectors("CTriad")
-  >>> print(proteins.encodings)
-  >>> proteins.to_csv("CTriad.csv", "index=False", header=False)
+from ProteinFeatureVectors import Protein
+proteins = Protein()
+proteins.display_feature_types()
+proteins.get_feature_vectors("CTriad", file='data_examples/multi.fa')
+print(proteins.encodings)
+proteins.to_csv("CTriad.csv", "index=False", header=False)
+```
+
+Sequences from a dict:
+
+```python
+from ProteinFeatureVectors import Protein
+seqs = {"A1": "MLVTIKIGGQLKEAL...LDTGADDTVLEDM", "B2": "MHLPGKWKPKMIGGIG....GFIKVRQYDQILVEICGH"}
+proteins = Protein()
+proteins.get_feature_vectors("CTriad", pdict=seqs)
+print(proteins.encodings)
 ```
 
 ## Feature Vectors
