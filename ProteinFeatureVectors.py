@@ -29,7 +29,7 @@ class Protein:
     >>> proteins.to_csv("AAC.csv", "index=False", header=False)
     """
 
-    def __init__(self, file=None):
+    def __init__(self):
         self.encodings = None  # pandas dataframe
         self.fasta_list = None
 
@@ -101,10 +101,6 @@ class Protein:
 
         self.minimum_length_without_minus = 1
         self.maximum_length_without_minus = 0
-        if file is not None:
-            self.file = file
-            self.read_fasta()
-            self.sequence_number = len(self.fasta_list)
 
         """
         >>>protein.fasta_list
@@ -138,9 +134,31 @@ class Protein:
             except Exception as e:
                 sys.exit(f"Parameter file parser error: {e}")
 
-    def get_feature_vectors(self, descriptor):
-        if self.fasta_list is None:
+    def get_feature_vectors(self, descriptor, file=None, pdict=None):
+        """get_feature_vectors
+
+        Parameters
+        ----------
+        descriptor : string
+            Name of feature vector
+        file : sequence file name, optional
+            Fasta file name
+        dict : tuple, optional
+            Key is an id, value is a sequence string
+        """
+        if file is not None:
+            self.file = file
+            self.read_fasta()
+        elif pdict is not None:
+            self.fasta_list = [
+                [id, sequence] for id, sequence in pdict.items()
+            ]
+
+        elif self.fasta_list is None:
             sys.exit("No sequence supplied")
+
+        self.sequence_number = len(self.fasta_list)
+
         # copy parameters
         if descriptor in self.__default_para_dict:
             for key in self.__default_para_dict[descriptor]:
