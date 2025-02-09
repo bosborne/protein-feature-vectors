@@ -11,7 +11,7 @@ from Bio.SeqIO.FastaIO import FastaIterator
 
 class Calculator:
     """
-    >>> from ProteinFeatureVectors import Calculator
+    >>> from protein_feature_vectors import Calculator
 
     # create a instance
     >>> proteins = Calculator()
@@ -126,13 +126,15 @@ class Calculator:
         self.fasta_list = fasta_sequences
 
     def import_parameters(self, file):
-        if os.path.exists(file):
-            try:
-                with open(file) as f:
-                    records = f.read().strip()
-                self.__default_para_dict = json.loads(records)
-            except Exception as e:
-                sys.exit(f"Parameter file parser error: {e}")
+        settings = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)), file
+        )
+        if os.path.exists(settings):
+            with open(settings) as f:
+                records = f.read().strip()
+            self.__default_para_dict = json.loads(records)
+        else:
+            sys.exit(f"Parameter file '{settings}' not found")
 
     def get_feature_vectors(self, descriptor, file=None, pdict=None):
         """get_feature_vectors

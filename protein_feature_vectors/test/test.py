@@ -4,7 +4,7 @@ import os
 srcdir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 sys.path.insert(0, srcdir)
 
-from ProteinFeatureVectors import Calculator  # noqa: E402
+from protein_feature_vectors import Calculator  # noqa: E402
 
 proteins = Calculator()
 proteins.display_feature_types()

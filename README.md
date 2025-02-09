@@ -24,7 +24,7 @@ This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/i
 Sequences from a Fasta file:
 
 ```python
-from ProteinFeatureVectors import Calculator
+from protein_feature_vectors import Calculator
 proteins = Calculator()
 proteins.display_feature_types()
 proteins.get_feature_vectors("CTriad", file='data_examples/multi.fa')
@@ -35,7 +35,7 @@ proteins.to_csv("CTriad.csv", "index=False", header=False)
 Sequences from a dict:
 
 ```python
-from ProteinFeatureVectors import Calculator
+from protein_feature_vectors import Calculator
 seqs = {"A1": "MLVTIKIGGQLKEAL...LDTGADDTVLEDM", "B2": "MHLPGKWKPKMIGGIG....GFIKVRQYDQILVEICGH"}
 proteins = Calculator()
 proteins.get_feature_vectors("CTriad", pdict=seqs)
