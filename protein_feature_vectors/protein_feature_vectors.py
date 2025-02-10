@@ -1789,10 +1789,6 @@ class Calculator:
         return res
 
     def _CTriad(self):
-        # try:
-        # if self.minimum_length_without_minus < 3:
-        #     self.error_msg = "CTriad descriptor need fasta sequence with minimum length > 3."
-        #     return False
         AAGroup = {
             "g1": "AGV",
             "g2": "ILFP",
@@ -1820,6 +1816,9 @@ class Calculator:
         encodings.append(header)
         for i in self.fasta_list:
             name, sequence = i[0], i[1]
+            # if len(sequence) < 30:
+            #     print(f"CTriad needs sequence with length > 30 {name}")
+            #     continue
             code = [name]
             code = code + self.CalculateKSCTriad(sequence, 0, features, AADict)
             encodings.append(code)
