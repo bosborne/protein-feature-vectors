@@ -166,12 +166,14 @@ class Calculator:
                 self.__default_para[key] = self.__default_para_dict[
                     descriptor
                 ][key]
+        else:
+            sys.exit(f"No such algorithm: {descriptor}")
 
         if descriptor in self.__cmd_dict:
             cmd = self.__cmd_dict[descriptor]
             eval(cmd)
         else:
-            print("The descriptor type does not exist.")
+            sys.exit(f"No such algorithm: {descriptor}")
 
     def display_feature_types(self):
         info = """        
@@ -1985,67 +1987,67 @@ class Calculator:
             return False
 
     def _QSOrder(self):
+        nlag = self.__default_para["nlag"]
+        w = self.__default_para["weight"]
+        # if nlag > self.minimum_length_without_minus - 1:
+        #     self.error_msg = "The lag value is out of range."
+        #     return False
+        dataFile0 = os.path.join(
+            os.path.split(os.path.realpath(__file__))[0],
+            "data",
+            "Schneider-Wrede.txt",
+        )
+        dataFile1 = os.path.join(
+            os.path.split(os.path.realpath(__file__))[0],
+            "data",
+            "Grantham.txt",
+        )
+        AA = "ACDEFGHIKLMNPQRSTVWY"
+        AA1 = "ARNDCQEGHILKMFPSTWYV"
+        DictAA = {}
+        for i in range(len(AA)):
+            DictAA[AA[i]] = i
+        DictAA1 = {}
+        for i in range(len(AA1)):
+            DictAA1[AA1[i]] = i
+        with open(dataFile0) as f:
+            records = f.readlines()[1:]
+        AADistance = []
+        for i in records:
+            array = i.rstrip().split()[1:] if i.rstrip() != "" else None
+            AADistance.append(array)
+        AADistance = np.array(
+            [
+                float(AADistance[i][j])
+                for i in range(len(AADistance))
+                for j in range(len(AADistance[i]))
+            ]
+        ).reshape((20, 20))
+        with open(dataFile1) as f:
+            records = f.readlines()[1:]
+        AADistance1 = []
+        for i in records:
+            array = i.rstrip().split()[1:] if i.rstrip() != "" else None
+            AADistance1.append(array)
+        AADistance1 = np.array(
+            [
+                float(AADistance1[i][j])
+                for i in range(len(AADistance1))
+                for j in range(len(AADistance1[i]))
+            ]
+        ).reshape((20, 20))
+        encodings = []
+        header = ["SampleName"]
+        for aa in AA1:
+            header.append("QSOrder_Schneider.Xr." + aa)
+        for aa in AA1:
+            header.append("QSOrder_Grantham.Xr." + aa)
+        for n in range(1, nlag + 1):
+            header.append("QSOrder_Schneider.Xd." + str(n))
+        for n in range(1, nlag + 1):
+            header.append("QSOrder_Grantham.Xd." + str(n))
+        encodings.append(header)
         try:
-            nlag = self.__default_para["nlag"]
-            w = self.__default_para["weight"]
-            # if nlag > self.minimum_length_without_minus - 1:
-            #     self.error_msg = "The lag value is out of range."
-            #     return False
-            dataFile0 = os.path.join(
-                os.path.split(os.path.realpath(__file__))[0],
-                "data",
-                "Schneider-Wrede.txt",
-            )
-            dataFile1 = os.path.join(
-                os.path.split(os.path.realpath(__file__))[0],
-                "data",
-                "Grantham.txt",
-            )
-            AA = "ACDEFGHIKLMNPQRSTVWY"
-            AA1 = "ARNDCQEGHILKMFPSTWYV"
-            DictAA = {}
-            for i in range(len(AA)):
-                DictAA[AA[i]] = i
-            DictAA1 = {}
-            for i in range(len(AA1)):
-                DictAA1[AA1[i]] = i
-            with open(dataFile0) as f:
-                records = f.readlines()[1:]
-            AADistance = []
-            for i in records:
-                array = i.rstrip().split()[1:] if i.rstrip() != "" else None
-                AADistance.append(array)
-            AADistance = np.array(
-                [
-                    float(AADistance[i][j])
-                    for i in range(len(AADistance))
-                    for j in range(len(AADistance[i]))
-                ]
-            ).reshape((20, 20))
-            with open(dataFile1) as f:
-                records = f.readlines()[1:]
-            AADistance1 = []
-            for i in records:
-                array = i.rstrip().split()[1:] if i.rstrip() != "" else None
-                AADistance1.append(array)
-            AADistance1 = np.array(
-                [
-                    float(AADistance1[i][j])
-                    for i in range(len(AADistance1))
-                    for j in range(len(AADistance1[i]))
-                ]
-            ).reshape((20, 20))
-            encodings = []
-            header = ["SampleName"]
-            for aa in AA1:
-                header.append("QSOrder_Schneider.Xr." + aa)
-            for aa in AA1:
-                header.append("QSOrder_Grantham.Xr." + aa)
-            for n in range(1, nlag + 1):
-                header.append("QSOrder_Schneider.Xd." + str(n))
-            for n in range(1, nlag + 1):
-                header.append("QSOrder_Grantham.Xd." + str(n))
-            encodings.append(header)
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
                 code = [name]
@@ -2086,16 +2088,16 @@ class Calculator:
                 for num in arrayGM:
                     code.append((w * num) / (1 + w * sum(arrayGM)))
                 encodings.append(code)
-            encodings = np.array(encodings)
-            self.encodings = pd.DataFrame(
-                encodings[1:, 1:].astype(float),
-                columns=encodings[0, 1:],
-                index=encodings[1:, 0],
-            )
-            return True
         except Exception as e:
-            print(f"Error: {e}")
-            return False
+            print(f"Error: {e} {name}")
+
+        encodings = np.array(encodings)
+        self.encodings = pd.DataFrame(
+            encodings[1:, 1:].astype(float),
+            columns=encodings[0, 1:],
+            index=encodings[1:, 0],
+        )
+        return True
 
     def Rvalue(self, aa1, aa2, AADict, Matrix):
         return sum(

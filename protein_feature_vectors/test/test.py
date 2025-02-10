@@ -13,6 +13,7 @@ proteins.get_feature_vectors(
     "QSOrder", file=f"{srcdir}/data_examples/multi.fa"
 )
 assert isinstance(proteins.encodings, pd.DataFrame)
+assert proteins.encodings.shape[0] == 3
 
 seqs = {
     "A12345": "LVTIKIGGQLKEALLDTGADDTVLEDMHLPGKWKPKMIGGIGGFIKVRQYDQILVEICGH"
