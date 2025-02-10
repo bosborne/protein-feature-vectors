@@ -47,37 +47,33 @@ print(proteins.encodings)
 | Name | Description | Length |
 |------|-------------|--------|
 | AAC | Amino acid composition | 20 |
-| CKSAAP_type_1 | Composition of k-spaced amino acid pairs type 1 - normalized | 1600 |
-| CKSAAP_type_2 | Composition of k-spaced amino acid pairs type 2 - raw count | 1600 |
-| DPC_type_1 | Dipeptide composition type 1 - normalized | 400 |
-| DPC_type_2 | Dipeptide composition type 2 - raw count | 400 |
-| TPC_type_1 | Tripeptide composition type 1 - normalized | 8000  |
-| TPC_type_2 | Tripeptide composition type 1 - raw count | 8000  |
-| CTDC | Composition | 39 |
-| CTDT | Transition | 39 |
-| CTDD | Distribution | 195 |
-| CTriad | Conjoint triad | 343 |
-| DDE | Composition and distribution of dipeptides | 400 |
-| KSCTriad | Conjoint k-spaced triad | 1372 |
+| AC | Auto covariance | 24 |
+| ACC | Auto-cross covariance | 192 |
+| APAAC | Amphiphilic PAAC | 26 |
 | ASDC | Adaptive skip dipeptide composition | 400 |
-| DistancePair | PseAAC of distance-pairs and reduced alphabe | 20 |
-| GAAC | Grouped amino acid composition | 5 |
+| CC | Cross covariance | 168 |
 | CKSAAGP_type_1 | Composition of k-spaced amino acid group pairs type 1- normalized | 100 |
 | CKSAAGP_type_2 | Composition of k-spaced amino acid group pairs type 2- raw count | 100 |
+| CKSAAP_type_1 | Composition of k-spaced amino acid pairs type 1 - normalized | 1600 |
+| CKSAAP_type_2 | Composition of k-spaced amino acid pairs type 2 - raw count | 1600 |
+| CTDC | Composition | 39 |
+| CTDD | Distribution | 195 |
+| CTDT | Transition | 39 |
+| CTriad | Conjoint triad | 343 |
+| DDE | Composition and distribution of dipeptides | 400 |
+| DistancePair | PseAAC of distance-pairs and reduced alphabe | 20 |
+| DPC_type_1 | Dipeptide composition type 1 - normalized | 400 |
+| DPC_type_2 | Dipeptide composition type 2 - raw count | 400 |
+| GAAC | Grouped amino acid composition | 5 |
 | GDPC_type_1 | Grouped dipeptide composition type 1 - normalized | 25 |
 | GDPC_type_2 | Grouped dipeptide composition type 2 - raw count | 25 |
+| Geary | Spatial autocorrelation of physicochemical properties | 24 |
 | GTPC_type_1 | Grouped tripeptide composition type 1 - normalized | 125 |
 | GTPC_type_2 | Grouped tripeptide composition type 1 - raw count | 125 |
+| KSCTriad | Conjoint k-spaced triad | 1372 |
 | Moran | Spatial autocorrelation of physicochemical properties | 24 |
-| Geary | Spatial autocorrelation of physicochemical properties | 24 |
 | NMBroto | Normalized Moreau-Broto | 24 |
-| AC | Auto covariance | 24 |
-| CC | Cross covariance | 168 |
-| ACC | Auto-cross covariance | 192 |
-| SOCNumber | Sequence-order-coupling number | 6 |
-| QSOrder | Quasi-sequence-order descriptors | 46 |
 | PAAC | Pseudo-amino acid composition | 23 |
-| APAAC | Amphiphilic PAAC | 26 |
 | PseKRAAC_type_1 | Pseudo K-tuple reduced amino acids composition type 1 | 4 |
 | PseKRAAC_type_2 | Pseudo K-tuple reduced amino acids composition type 2 | 4 |
 | PseKRAAC_type_3A | Pseudo K-tuple reduced amino acids composition type 3A | 4 |
@@ -97,3 +93,7 @@ print(proteins.encodings)
 | PseKRAAC_type_14 | Pseudo K-tuple reduced amino acids composition type 14 | 4 |
 | PseKRAAC_type_15 | Pseudo K-tuple reduced amino acids composition type 15 | 4 |
 | PseKRAAC_type_16 | Pseudo K-tuple reduced amino acids composition type 16 | 4 |
+| QSOrder | Quasi-sequence-order descriptors | 46 |
+| SOCNumber | Sequence-order-coupling number | 6 |
+| TPC_type_1 | Tripeptide composition type 1 - normalized | 8000  |
+| TPC_type_2 | Tripeptide composition type 1 - raw count | 8000 |
