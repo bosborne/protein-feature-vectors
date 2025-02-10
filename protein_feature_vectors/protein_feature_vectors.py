@@ -147,6 +147,9 @@ class Calculator:
         pdict : dict, optional
             Key is an id, value is a sequence string
         """
+        if descriptor not in self.__cmd_dict:
+            sys.exit(f"No such algorithm: {descriptor}")
+
         if file is not None:
             self.file = file
             self.read_fasta()
@@ -159,21 +162,15 @@ class Calculator:
 
         self.sequence_number = len(self.fasta_list)
         self.encodings = None
-
-        # copy parameters
+        # Copy parameters
         if descriptor in self.__default_para_dict:
             for key in self.__default_para_dict[descriptor]:
                 self.__default_para[key] = self.__default_para_dict[
                     descriptor
                 ][key]
-        else:
-            sys.exit(f"No such algorithm: {descriptor}")
-
-        if descriptor in self.__cmd_dict:
-            cmd = self.__cmd_dict[descriptor]
-            eval(cmd)
-        else:
-            sys.exit(f"No such algorithm: {descriptor}")
+        # Run the command
+        cmd = self.__cmd_dict[descriptor]
+        eval(cmd)
 
     def display_feature_types(self):
         info = """        
@@ -476,21 +473,18 @@ class Calculator:
             return False
 
     def _TPC(self, normalized=True):
-        try:
-            AA = "ACDEFGHIKLMNPQRSTVWY"
-            encodings = []
-            triPeptides = [
-                "TPC_" + aa1 + aa2 + aa3
-                for aa1 in AA
-                for aa2 in AA
-                for aa3 in AA
-            ]
-            header = ["SampleName"] + triPeptides
-            encodings.append(header)
-            AADict = {}
-            for i in range(len(AA)):
-                AADict[AA[i]] = i
-            for i in self.fasta_list:
+        AA = "ACDEFGHIKLMNPQRSTVWY"
+        encodings = []
+        triPeptides = [
+            "TPC_" + aa1 + aa2 + aa3 for aa1 in AA for aa2 in AA for aa3 in AA
+        ]
+        header = ["SampleName"] + triPeptides
+        encodings.append(header)
+        AADict = {}
+        for i in range(len(AA)):
+            AADict[AA[i]] = i
+        for i in self.fasta_list:
+            try:
                 name, sequence = i[0], i[1]
                 if len(sequence) < 3:
                     print(f"'{name}' sequence is less than 3, skipping")
@@ -515,16 +509,15 @@ class Calculator:
                         tmpCode = [i / sum(tmpCode) for i in tmpCode]
                 code = code + tmpCode
                 encodings.append(code)
-            encodings = np.array(encodings)
-            self.encodings = pd.DataFrame(
-                encodings[1:, 1:].astype(float),
-                columns=encodings[0, 1:],
-                index=encodings[1:, 0],
-            )
-            return True
-        except Exception as e:
-            self.error_msg = str(e)
-            return False
+            except Exception as e:
+                print(f"Error: {e} {name}")
+        encodings = np.array(encodings)
+        self.encodings = pd.DataFrame(
+            encodings[1:, 1:].astype(float),
+            columns=encodings[0, 1:],
+            index=encodings[1:, 0],
+        )
+        return True
 
     def _GAAC(self):
         try:
