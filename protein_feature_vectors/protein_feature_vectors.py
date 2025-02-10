@@ -30,7 +30,6 @@ class Calculator:
     """
 
     def __init__(self):
-        self.encodings = None  # pandas dataframe
         self.fasta_list = None
 
         self.import_parameters("Protein_parameters_setting.json")
@@ -47,37 +46,33 @@ class Calculator:
         }
         self.__cmd_dict = {
             "AAC": "self._AAC()",
-            "CKSAAP_type_1": "self._CKSAAP(normalized=True)",
-            "CKSAAP_type_2": "self._CKSAAP(normalized=False)",
-            "DPC_type_1": "self._DPC(normalized=True)",
-            "DPC_type_2": "self._DPC(normalized=False)",
-            "DDE": "self._DDE()",
-            "TPC_type_1": "self._TPC(normalized=True)",
-            "TPC_type_2": "self._TPC(normalized=False)",
-            "GAAC": "self._GAAC()",
-            "CKSAAGP_type_1": "self._CKSAAGP(normalized=True)",
-            "CKSAAGP_type_2": "self._CKSAAGP(normalized=False)",
-            "GDPC_type_1": "self._GDPC(normalized=True)",
-            "GDPC_type_2": "self._GDPC(normalized=False)",
-            "GTPC_type_1": "self._GTPC(normalized=True)",
-            "GTPC_type_2": "self._GTPC(normalized=False)",
-            "NMBroto": "self._NMBroto()",
-            "Moran": "self._Moran()",
-            "Geary": "self._Geary()",
-            "CTDC": "self._CTDC()",
-            "CTDT": "self._CTDT()",
-            "CTDD": "self._CTDD()",
-            "CTriad": "self._CTriad()",
-            "KSCTriad": "self._KSCTriad()",
-            "SOCNumber": "self._SOCNumber()",
-            "QSOrder": "self._QSOrder()",
-            "PAAC": "self._PAAC()",
+            "AC": "self._AC()",
+            "ACC": "self._ACC()",
             "APAAC": "self._APAAC()",
             "ASDC": "self._ASDC()",
-            "DistancePair": "self._DistancePair()",
-            "AC": "self._AC()",
             "CC": "self._CC()",
-            "ACC": "self._ACC()",
+            "CKSAAGP_type_1": "self._CKSAAGP(normalized=True)",
+            "CKSAAGP_type_2": "self._CKSAAGP(normalized=False)",
+            "CKSAAP_type_1": "self._CKSAAP(normalized=True)",
+            "CKSAAP_type_2": "self._CKSAAP(normalized=False)",
+            "CTDC": "self._CTDC()",
+            "CTDD": "self._CTDD()",
+            "CTDT": "self._CTDT()",
+            "CTriad": "self._CTriad()",
+            "DDE": "self._DDE()",
+            "DistancePair": "self._DistancePair()",
+            "DPC_type_1": "self._DPC(normalized=True)",
+            "DPC_type_2": "self._DPC(normalized=False)",
+            "GAAC": "self._GAAC()",
+            "GDPC_type_1": "self._GDPC(normalized=True)",
+            "GDPC_type_2": "self._GDPC(normalized=False)",
+            "Geary": "self._Geary()",
+            "GTPC_type_1": "self._GTPC(normalized=True)",
+            "GTPC_type_2": "self._GTPC(normalized=False)",
+            "KSCTriad": "self._KSCTriad()",
+            "Moran": "self._Moran()",
+            "NMBroto": "self._NMBroto()",
+            "PAAC": "self._PAAC()",
             "PseKRAAC_type_1": "self._PseKRAAC_type_1()",
             "PseKRAAC_type_2": "self._PseKRAAC_type_2()",
             "PseKRAAC_type_3A": "self._PseKRAAC_type_3A()",
@@ -97,6 +92,10 @@ class Calculator:
             "PseKRAAC_type_14": "self._PseKRAAC_type_14()",
             "PseKRAAC_type_15": "self._PseKRAAC_type_15()",
             "PseKRAAC_type_16": "self._PseKRAAC_type_16()",
+            "QSOrder": "self._QSOrder()",
+            "SOCNumber": "self._SOCNumber()",
+            "TPC_type_1": "self._TPC(normalized=True)",
+            "TPC_type_2": "self._TPC(normalized=False)",
         }
 
         self.minimum_length_without_minus = 1
@@ -177,36 +176,33 @@ class Calculator:
     def display_feature_types(self):
         info = """        
         AAC                                                Amino acid composition
-        CKSAAP_type_1                                      Composition of k-spaced amino acid pairs type 1 - normalized
-        CKSAAP_type_2                                      Composition of k-spaced amino acid pairs type 2 - raw count
-        DPC_type_1                                         Dipeptide composition type 1 - normalized
-        DPC_type_2                                         Dipeptide composition type 2 - raw count
-        TPC_type_1                                         Tripeptide composition type 1 - normalized
-        TPC_type_2                                         Tripeptide composition type 1 - raw count
-        CTDC                                               Composition
-        CTDT                                               Transition
-        CTDD                                               Distribution
-        CTriad                                             Conjoint triad
-        KSCTriad                                           Conjoint k-spaced triad
+        AC                                                 Auto covariance
+        ACC                                                Auto-cross covariance
+        APAAC                                              Amphiphilic PAAC
         ASDC                                               Adaptive skip dipeptide composition
-        DistancePair                                       PseAAC of distance-pairs and reduced alphabe
-        GAAC                                               Grouped amino acid composition
+        CC                                                 Cross covariance
         CKSAAGP_type_1                                     Composition of k-spaced amino acid group pairs type 1- normalized
         CKSAAGP_type_2                                     Composition of k-spaced amino acid group pairs type 2- raw count
+        CKSAAP_type_1                                      Composition of k-spaced amino acid pairs type 1 - normalized
+        CKSAAP_type_2                                      Composition of k-spaced amino acid pairs type 2 - raw count
+        CTDC                                               Composition
+        CTDD                                               Distribution
+        CTDT                                               Transition
+        CTriad                                             Conjoint triad
+        DistancePair                                       PseAAC of distance-pairs and reduced alphabet
+        DDE                                                Composition and distribution of dipeptides
+        DPC_type_1                                         Dipeptide composition type 1 - normalized
+        DPC_type_2                                         Dipeptide composition type 2 - raw count
+        GAAC                                               Grouped amino acid composition
         GDPC_type_1                                        Grouped dipeptide composition type 1 - normalized
         GDPC_type_2                                        Grouped dipeptide composition type 2 - raw count
+        Geary                                              Geary
         GTPC_type_1                                        Grouped tripeptide composition type 1 - normalized
         GTPC_type_2                                        Grouped tripeptide composition type 1 - raw count
+        KSCTriad                                           Conjoint k-spaced triad
         Moran                                              Moran
-        Geary                                              Geary
         NMBroto                                            Normalized Moreau-Broto
-        AC                                                 Auto covariance
-        CC                                                 Cross covariance
-        ACC                                                Auto-cross covariance
-        SOCNumber                                          Sequence-order-coupling number
-        QSOrder                                            Quasi-sequence-order descriptors
         PAAC                                               Pseudo-amino acid composition
-        APAAC                                              Amphiphilic PAAC
         PseKRAAC_type_1                                    Pseudo K-tuple reduced amino acids composition type 1
         PseKRAAC_type_2                                    Pseudo K-tuple reduced amino acids composition type 2
         PseKRAAC_type_3A                                   Pseudo K-tuple reduced amino acids composition type 3A
@@ -226,6 +222,10 @@ class Calculator:
         PseKRAAC_type_14                                   Pseudo K-tuple reduced amino acids composition type 14
         PseKRAAC_type_15                                   Pseudo K-tuple reduced amino acids composition type 15
         PseKRAAC_type_16                                   Pseudo K-tuple reduced amino acids composition type 16        
+        QSOrder                                            Quasi-sequence-order descriptors
+        SOCNumber                                          Sequence-order-coupling number
+        TPC_type_1                                         Tripeptide composition type 1 - normalized
+        TPC_type_2                                         Tripeptide composition type 1 - raw count
         """
         print(info)
 

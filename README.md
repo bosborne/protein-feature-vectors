@@ -57,6 +57,7 @@ print(proteins.encodings)
 | CTDT | Transition | 39 |
 | CTDD | Distribution | 195 |
 | CTriad | Conjoint triad | 343 |
+| DDE | Composition and distribution of dipeptides | 400 |
 | KSCTriad | Conjoint k-spaced triad | 1372 |
 | ASDC | Adaptive skip dipeptide composition | 400 |
 | DistancePair | PseAAC of distance-pairs and reduced alphabe | 20 |

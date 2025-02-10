@@ -1,5 +1,6 @@
 import sys
 import os
+import pandas as pd
 
 srcdir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 sys.path.insert(0, srcdir)
@@ -11,7 +12,7 @@ proteins.display_feature_types()
 proteins.get_feature_vectors(
     "QSOrder", file=f"{srcdir}/data_examples/multi.fa"
 )
-print(proteins.encodings)
+assert isinstance(proteins.encodings, pd.DataFrame)
 
 seqs = {
     "A12345": "LVTIKIGGQLKEALLDTGADDTVLEDMHLPGKWKPKMIGGIGGFIKVRQYDQILVEICGH"
