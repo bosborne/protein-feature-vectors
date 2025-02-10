@@ -159,6 +159,8 @@ class Calculator:
             ]
         elif self.fasta_list is None:
             sys.exit("No sequence supplied")
+        # Remove sequences with invalid chars
+        self.remove_non_standard_aa()
 
         self.sequence_number = len(self.fasta_list)
         self.encodings = None
@@ -171,6 +173,18 @@ class Calculator:
         # Run the command
         cmd = self.__cmd_dict[descriptor]
         eval(cmd)
+
+    def remove_non_standard_aa(self):
+        non_standard = set("BJOUXZ")
+        standardized = list()
+        for fasta in self.fasta_list:
+            # '&' is intersection
+            found = set(fasta[1]) & non_standard
+            if found:
+                print(f"Non-standard aa in {fasta[0]}: {found}")
+            else:
+                standardized.append(fasta)
+        self.fasta_list = standardized
 
     def display_feature_types(self):
         info = """        
