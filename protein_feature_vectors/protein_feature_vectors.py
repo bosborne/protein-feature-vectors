@@ -159,6 +159,7 @@ class Calculator:
             sys.exit("No sequence supplied")
 
         self.sequence_number = len(self.fasta_list)
+        self.encodings = None
 
         # copy parameters
         if descriptor in self.__default_para_dict:
@@ -489,6 +490,9 @@ class Calculator:
                 AADict[AA[i]] = i
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
+                if len(sequence) < 3:
+                    print(f"'{name}' sequence is less than 3, skipping")
+                    continue
                 code = [name]
                 tmpCode = [0] * 8000
                 for j in range(len(sequence) - 3 + 1):
@@ -1836,9 +1840,6 @@ class Calculator:
     def _KSCTriad(self):
         try:
             gap = self.__default_para["kspace"]
-            # if self.minimum_length_without_minus < 2 * gap + 3:
-            #     self.error_msg = 'KSCTriad" encoding, the input fasta sequences should be greater than (2*gap+3).'
-            #     return False
             AAGroup = {
                 "g1": "AGV",
                 "g2": "ILFP",
@@ -1868,9 +1869,11 @@ class Calculator:
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
                 code = [name]
-                if len(sequence) < 2 * gap + 3:
-                    self.error_msg = 'Error: for "KSCTriad" encoding, the input fasta sequences should be greater than (2*gap+3).'
-                    return 0
+                # if len(sequence) < 2 * gap + 3:
+                #     print(
+                #         f"Error: for KSCTriad encoding {name} sequence should be > (2*gap+3)"
+                #     )
+                #     continue
                 code = code + self.CalculateKSCTriad(
                     sequence, gap, features, AADict
                 )
@@ -1988,7 +1991,7 @@ class Calculator:
             # if nlag > self.minimum_length_without_minus - 1:
             #     self.error_msg = "The lag value is out of range."
             #     return False
-            dataFile = os.path.join(
+            dataFile0 = os.path.join(
                 os.path.split(os.path.realpath(__file__))[0],
                 "data",
                 "Schneider-Wrede.txt",
@@ -2006,7 +2009,7 @@ class Calculator:
             DictAA1 = {}
             for i in range(len(AA1)):
                 DictAA1[AA1[i]] = i
-            with open(dataFile) as f:
+            with open(dataFile0) as f:
                 records = f.readlines()[1:]
             AADistance = []
             for i in records:
@@ -2044,7 +2047,7 @@ class Calculator:
                 header.append("QSOrder_Grantham.Xd." + str(n))
             encodings.append(header)
             for i in self.fasta_list:
-                name, sequence, _ = i[0], i[1]
+                name, sequence = i[0], i[1]
                 code = [name]
                 arraySW = []
                 arrayGM = []
@@ -2091,7 +2094,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            print(f"Error: {e}")
             return False
 
     def Rvalue(self, aa1, aa2, AADict, Matrix):

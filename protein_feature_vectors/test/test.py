@@ -8,7 +8,9 @@ from protein_feature_vectors import Calculator  # noqa: E402
 
 proteins = Calculator()
 proteins.display_feature_types()
-proteins.get_feature_vectors("CTriad", file=f"{srcdir}/data_examples/multi.fa")
+proteins.get_feature_vectors(
+    "QSOrder", file=f"{srcdir}/data_examples/multi.fa"
+)
 print(proteins.encodings)
 
 seqs = {
@@ -23,7 +25,8 @@ seqs = {
     + "TINVPVIAKEVGCGISAPLASKLADAGVKAIDVAGAGGISWQKVEECRYLDRFGNEERFSPSALDEF"
     + "LNWGIPTAECLTGIAALKEKSPEYGSLAVISSGGIRNGLDVAKSIALGADIAASAQHLLKALRAGTLEE"
     + "TIRTWANDLRAAMFLTGSATTAQLKHAPIYRKP",
+    "short": "M",
 }
 
-proteins.get_feature_vectors("TPC_type_2", pdict=seqs)
+proteins.get_feature_vectors("QSOrder", pdict=seqs)
 print(proteins.encodings)
