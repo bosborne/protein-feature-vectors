@@ -109,11 +109,7 @@ class Calculator:
         """
 
     def read_fasta(self):
-        """
-        read fasta sequence
-        :param file:
-        :return:
-        """
+        """read_fasta"""
         fasta_sequences = []
         if not os.path.exists(self.file):
             msg = "Error: file %s does not exist." % self.file
@@ -125,6 +121,13 @@ class Calculator:
         self.fasta_list = fasta_sequences
 
     def import_parameters(self, file):
+        """import_parameters
+
+        Parameters
+        ----------
+        file : str
+            Input JSON settings file
+        """
         settings = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), file
         )
@@ -160,7 +163,7 @@ class Calculator:
         elif self.fasta_list is None:
             sys.exit("No sequence supplied")
         # Remove sequences with invalid chars
-        self.remove_non_standard_aa()
+        self.validate()
 
         self.sequence_number = len(self.fasta_list)
         self.encodings = None
@@ -174,12 +177,16 @@ class Calculator:
         cmd = self.__cmd_dict[descriptor]
         eval(cmd)
 
-    def remove_non_standard_aa(self):
+    def validate(self):
+        """validate
+        Remove sequences with invalid characters and convert to uppercase
+        """
         standardized = list()
         for fasta in self.fasta_list:
-            result = self.check_for_nonstandard(fasta[1].upper())
+            seqstr = fasta[1].upper()
+            result = self.check_for_nonstandard(seqstr)
             if len(result) == 0:
-                standardized.append(fasta)
+                standardized.append([fasta[0], seqstr])
             else:
                 print(f"Non-standard aa in {fasta[0]}: {result}")
         self.fasta_list = standardized
