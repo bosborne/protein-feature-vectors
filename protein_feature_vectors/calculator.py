@@ -31,7 +31,6 @@ class Calculator:
 
     def __init__(self):
         self.fasta_list = None
-
         self.import_parameters("Protein_parameters_setting.json")
         self.__default_para = {
             "sliding_window": 5,
@@ -97,23 +96,19 @@ class Calculator:
             "TPC_type_1": "self._TPC(normalized=True)",
             "TPC_type_2": "self._TPC(normalized=False)",
         }
-
         self.minimum_length_without_minus = 1
         self.maximum_length_without_minus = 0
 
-        """
-        >>>protein.fasta_list
-        [['H6SH45', 'FFRENLAFQQREARKFSS....DLIAEIQKQGQGQWTYQIYQE'], 
-        ['9HIV1', 'DFWEVQLGIPHP...YQEIVTLTEEAELELAENREI'], 
+    def read_fasta(self):
+        """read_fasta
+        >>>calc.fasta_list
+        [['H6SH45', 'FFRENLAFQQREARKFSS....DLIAEIQKQGQGQWTYQIYQE'],
+        ['9HIV1', 'DFWEVQLGIPHP...YQEIVTLTEEAELELAENREI'],
         ['H6SH45_9HIV1', 'FFRENLAFQQREARKF...WTYQIYQEIVTLTEEAELELAENREI']]
         """
-
-    def read_fasta(self):
-        """read_fasta"""
         fasta_sequences = []
         if not os.path.exists(self.file):
-            msg = "Error: file %s does not exist." % self.file
-            sys.exit(f"{msg}")
+            sys.exit(f"Error: cannot find file '{self.file}'")
         with open(self.file, "r") as handle:
             for record in FastaIterator(handle):
                 fasta_sequences.append([record.id, str(record.seq).upper()])
