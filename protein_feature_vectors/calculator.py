@@ -14,19 +14,19 @@ class Calculator:
     >>> from protein_feature_vectors import Calculator
 
     # create a instance
-    >>> proteins = Calculator()
+    >>> calc = Calculator()
 
     # display available methods
-    >>> proteins.display_feature_types()
+    >>> calc.display_feature_types()
 
     # calculate feature vectors
-    >>> proteins.get_feature_vectors("AAC", file="./data_examples/multi.fa")
+    >>> calc.get_feature_vectors("AAC", file="./data_examples/multi.fa")
 
     # display the feature vectors
-    >>> print(proteins.encodings)
+    >>> print(calc.encodings)
 
     # save feature vectors
-    >>> proteins.to_csv("AAC.csv", "index=False", header=False)
+    >>> calc.to_csv("AAC.csv", "index=False", header=False)
     """
 
     def __init__(self):

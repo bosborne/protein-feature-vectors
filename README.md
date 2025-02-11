@@ -25,11 +25,11 @@ Sequences from a Fasta file:
 
 ```python
 from protein_feature_vectors import Calculator
-proteins = Calculator()
-proteins.display_feature_types()
-proteins.get_feature_vectors("CTriad", file='data_examples/multi.fa')
-print(proteins.encodings)
-proteins.to_csv("CTriad.csv", "index=False", header=False)
+calc = Calculator()
+calc.display_feature_types()
+calc.get_feature_vectors("CTriad", file='data_examples/multi.fa')
+print(calc.encodings)
+calc.to_csv("CTriad.csv", "index=False", header=False)
 ```
 
 Sequences from a dict:
@@ -37,9 +37,9 @@ Sequences from a dict:
 ```python
 from protein_feature_vectors import Calculator
 seqs = {"A1": "MLVTIKIQLKEAL...LDTGADVLEDM", "B2": "MHLPGKWMIGGIG....GFIKVRQYDEICGH"}
-proteins = Calculator()
-proteins.get_feature_vectors("CTriad", pdict=seqs)
-print(proteins.encodings)
+calc = Calculator()
+calc.get_feature_vectors("CTriad", pdict=seqs)
+print(calc.encodings)
 ```
 
 ## Feature Vectors
