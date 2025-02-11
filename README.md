@@ -6,7 +6,7 @@ Code to produce fixed-length feature vectors from protein sequences based on iFe
 
 This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/iFeatureOmega-CLI), with the following differences:
 
-- It only makes feature vectors using protein sequence (not based on DNA, RNA, or chemical structures)
+- It only makes feature vectors using protein sequence (not based on DNA, RNA, or compounds)
 - It only makes fixed-length feature vectors
 - It has fewer dependencies than iFeatureOmega-CLI
 - It just creates feature vectors and has no other plotting or analytical capabilities
@@ -59,9 +59,9 @@ print(proteins.encodings)
 | CTDC | Composition | 39 |
 | CTDD | Distribution | 195 |
 | CTDT | Transition | 39 |
-| CTriad | Conjoint triad | 343 |
+| CTriad | Triads of 7 groups based on dipoles and volumes | 343 |
 | DDE | Composition and distribution of dipeptides | 400 |
-| DistancePair | PseAAC of distance-pairs and reduced alphabe | 20 |
+| DistancePair | PseAAC of distance-pairs and reduced alphabet | 20 |
 | DPC_type_1 | Dipeptide composition type 1 - normalized | 400 |
 | DPC_type_2 | Dipeptide composition type 2 - raw count | 400 |
 | GAAC | Grouped amino acid composition | 5 |
@@ -70,7 +70,7 @@ print(proteins.encodings)
 | Geary | Spatial autocorrelation of physicochemical properties | 24 |
 | GTPC_type_1 | Grouped tripeptide composition type 1 - normalized | 125 |
 | GTPC_type_2 | Grouped tripeptide composition type 1 - raw count | 125 |
-| KSCTriad | Conjoint k-spaced triad | 1372 |
+| KSCTriad | CTriad varied by spacing of 0, 1 or 2, or 3 | 1372 |
 | Moran | Spatial autocorrelation of physicochemical properties | 24 |
 | NMBroto | Normalized Moreau-Broto | 24 |
 | PAAC | Pseudo-amino acid composition | 23 |
@@ -93,7 +93,7 @@ print(proteins.encodings)
 | PseKRAAC_type_14 | Pseudo K-tuple reduced amino acids composition type 14 | 4 |
 | PseKRAAC_type_15 | Pseudo K-tuple reduced amino acids composition type 15 | 4 |
 | PseKRAAC_type_16 | Pseudo K-tuple reduced amino acids composition type 16 | 4 |
-| QSOrder | Quasi-sequence-order descriptors | 46 |
+| QSOrder | Quasi-sequence-order descriptors (nlag=13) | 46 |
 | SOCNumber | Sequence-order-coupling number | 6 |
 | TPC_type_1 | Tripeptide composition type 1 - normalized | 8000  |
 | TPC_type_2 | Tripeptide composition type 1 - raw count | 8000 |
