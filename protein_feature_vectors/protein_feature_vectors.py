@@ -175,16 +175,19 @@ class Calculator:
         eval(cmd)
 
     def remove_non_standard_aa(self):
-        non_standard = set("BJOUXZ")
         standardized = list()
         for fasta in self.fasta_list:
-            # '&' is intersection
-            found = set(fasta[1]) & non_standard
-            if found:
-                print(f"Non-standard aa in {fasta[0]}: {found}")
-            else:
+            result = self.check_for_nonstandard(fasta[1].upper())
+            if len(result) == 0:
                 standardized.append(fasta)
+            else:
+                print(f"Non-standard aa in {fasta[0]}: {result}")
         self.fasta_list = standardized
+
+    def check_for_nonstandard(self, seqstr):
+        non_standard = set("BJOUXZ")
+        # '&' is intersection
+        return set(seqstr) & non_standard
 
     def display_feature_types(self):
         info = """        
