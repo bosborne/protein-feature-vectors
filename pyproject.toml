@@ -6,7 +6,7 @@ authors = ["Brian Osborne <briano@bioteam.net>"]
 readme = "README.md"
 packages = [{ include = "protein_feature_vectors" }]
 include = [
-    "protein_feature_vectors/protein_feature_vectors.py",
+    "protein_feature_vectors/calculator.py",
     "protein_feature_vectors/Protein_parameters_setting.json",
     "protein_feature_vectors/data_examples/*",
     "protein_feature_vectors/data/*",
