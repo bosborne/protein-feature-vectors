@@ -151,7 +151,7 @@ class Calculator:
         if file is not None:
             self.file = file
             self.read_fasta()
-        elif pdict is not None:
+        elif pdict is not None and isinstance(pdict, dict):
             self.fasta_list = [
                 [id, sequence] for id, sequence in pdict.items()
             ]
