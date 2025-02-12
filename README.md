@@ -55,8 +55,8 @@ print(calc.encodings)
 | CC | Cross covariance | 168 |
 | CKSAAGP_type_1 | Composition of k-spaced amino acid group pairs - normalized | 100 |
 | CKSAAGP_type_2 | Composition of k-spaced amino acid group pairs - raw count | 100 |
-| CKSAAP_type_1 | Composition of k-spaced amino acid pairs - normalized | 1600 |
-| CKSAAP_type_2 | Composition of k-spaced amino acid pairs - raw count | 1600 |
+| CKSAAP_type_1 | k-spaced amino acid pairs, k = 0, 1, 2, and 3 - normalized | 1600 |
+| CKSAAP_type_2 | k-spaced amino acid pairs, k = 0, 1, 2, and 3 - raw count | 1600 |
 | CTDC | Composition | 39 |
 | CTDD | Distribution | 195 |
 | CTDT | Transition | 39 |
