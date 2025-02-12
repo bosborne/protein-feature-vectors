@@ -52,8 +52,8 @@ print(calc.encodings)
 | APAAC | Amphiphilic PAAC | 26 |
 | ASDC | Adaptive skip dipeptide composition | 400 |
 | CC | Cross covariance | 168 |
-| CKSAAGP_type_1 | Composition of k-spaced amino acid group pairs type 1- normalized | 100 |
-| CKSAAGP_type_2 | Composition of k-spaced amino acid group pairs type 2- raw count | 100 |
+| CKSAAGP_type_1 | Composition of k-spaced amino acid group pairs type 1 - normalized | 100 |
+| CKSAAGP_type_2 | Composition of k-spaced amino acid group pairs type 2 - raw count | 100 |
 | CKSAAP_type_1 | Composition of k-spaced amino acid pairs type 1 - normalized | 1600 |
 | CKSAAP_type_2 | Composition of k-spaced amino acid pairs type 2 - raw count | 1600 |
 | CTDC | Composition | 39 |
@@ -95,5 +95,6 @@ print(calc.encodings)
 | PseKRAAC_type_16 | Pseudo K-tuple reduced amino acids composition type 16 | 4 |
 | QSOrder | Quasi-sequence-order descriptors (nlag=13) | 46 |
 | SOCNumber | Sequence-order-coupling number | 6 |
-| TPC_type_1 | Tripeptide composition type 1 - normalized | 8000  |
-| TPC_type_2 | Tripeptide composition type 1 - raw count | 8000 |
+| TPC_type_1 | Tripeptide composition - normalized | 8000  |
+| TPC_type_2 | Tripeptide composition - raw count | 8000 |
+| TPC_type_3 | Tripeptide composition - normalized, rounded count | 8000 |

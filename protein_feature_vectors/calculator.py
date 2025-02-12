@@ -93,8 +93,9 @@ class Calculator:
             "PseKRAAC_type_16": "self._PseKRAAC_type_16()",
             "QSOrder": "self._QSOrder()",
             "SOCNumber": "self._SOCNumber()",
-            "TPC_type_1": "self._TPC(normalized=True)",
-            "TPC_type_2": "self._TPC(normalized=False)",
+            "TPC_type_1": "self._TPC(type=1)",
+            "TPC_type_2": "self._TPC(type=2)",
+            "TPC_type_3": "self._TPC(type=3)",
         }
         self.minimum_length_without_minus = 1
         self.maximum_length_without_minus = 0
@@ -243,7 +244,8 @@ class Calculator:
         QSOrder                                            Quasi-sequence-order descriptors
         SOCNumber                                          Sequence-order-coupling number
         TPC_type_1                                         Tripeptide composition type 1 - normalized
-        TPC_type_2                                         Tripeptide composition type 1 - raw count
+        TPC_type_2                                         Tripeptide composition type 2 - raw count
+        TPC_type_3                                         Tripeptide composition type 3 - normalized, rounded count
         """
         print(info)
 
@@ -491,7 +493,7 @@ class Calculator:
             self.error_msg = str(e)
             return False
 
-    def _TPC(self, normalized=True):
+    def _TPC(self, type=None):
         AA = "ACDEFGHIKLMNPQRSTVWY"
         encodings = []
         triPeptides = [
@@ -524,8 +526,13 @@ class Calculator:
                         + 1
                     )
                 if sum(tmpCode) != 0:
-                    if normalized:
+                    if type == 1:
                         tmpCode = [i / sum(tmpCode) for i in tmpCode]
+                    elif type == 3:
+                        tmpCode = [
+                            round((i * (1000 / len(sequence))), 1)
+                            for i in tmpCode
+                        ]
                 code = code + tmpCode
                 encodings.append(code)
             except Exception as e:
