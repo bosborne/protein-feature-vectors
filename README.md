@@ -10,10 +10,11 @@ This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/i
 - It only makes fixed-length feature vectors
 - It has fewer dependencies than iFeatureOmega-CLI
 - It just creates feature vectors and has no other plotting or analytical capabilities
+- It has additional variants of specific algorithms (e.g. TPC_type_3) created for faster Deep Learning
 
 ## Installation
 
-```sh  
+```sh
   git clone git@github.com:bosborne/protein-feature-vectors.git
   cd protein-feature-vectors
   pip3 install .
@@ -52,47 +53,47 @@ print(calc.encodings)
 | APAAC | Amphiphilic PAAC | 26 |
 | ASDC | Adaptive skip dipeptide composition | 400 |
 | CC | Cross covariance | 168 |
-| CKSAAGP_type_1 | Composition of k-spaced amino acid group pairs type 1 - normalized | 100 |
-| CKSAAGP_type_2 | Composition of k-spaced amino acid group pairs type 2 - raw count | 100 |
-| CKSAAP_type_1 | Composition of k-spaced amino acid pairs type 1 - normalized | 1600 |
-| CKSAAP_type_2 | Composition of k-spaced amino acid pairs type 2 - raw count | 1600 |
+| CKSAAGP_type_1 | Composition of k-spaced amino acid group pairs - normalized | 100 |
+| CKSAAGP_type_2 | Composition of k-spaced amino acid group pairs - raw count | 100 |
+| CKSAAP_type_1 | Composition of k-spaced amino acid pairs - normalized | 1600 |
+| CKSAAP_type_2 | Composition of k-spaced amino acid pairs - raw count | 1600 |
 | CTDC | Composition | 39 |
 | CTDD | Distribution | 195 |
 | CTDT | Transition | 39 |
 | CTriad | Triads of 7 groups based on dipoles and volumes | 343 |
 | DDE | Composition and distribution of dipeptides | 400 |
 | DistancePair | PseAAC of distance-pairs and reduced alphabet | 20 |
-| DPC_type_1 | Dipeptide composition type 1 - normalized | 400 |
-| DPC_type_2 | Dipeptide composition type 2 - raw count | 400 |
+| DPC_type_1 | Dipeptide composition - normalized | 400 |
+| DPC_type_2 | Dipeptide composition - raw count | 400 |
 | GAAC | Grouped amino acid composition | 5 |
-| GDPC_type_1 | Grouped dipeptide composition type 1 - normalized | 25 |
-| GDPC_type_2 | Grouped dipeptide composition type 2 - raw count | 25 |
+| GDPC_type_1 | Grouped dipeptide composition - normalized | 25 |
+| GDPC_type_2 | Grouped dipeptide composition - raw count | 25 |
 | Geary | Spatial autocorrelation of physicochemical properties | 24 |
-| GTPC_type_1 | Grouped tripeptide composition type 1 - normalized | 125 |
-| GTPC_type_2 | Grouped tripeptide composition type 1 - raw count | 125 |
+| GTPC_type_1 | Grouped tripeptide composition - normalized | 125 |
+| GTPC_type_2 | Grouped tripeptide composition - raw count | 125 |
 | KSCTriad | CTriad varied by spacing of 0, 1 or 2, or 3 | 1372 |
 | Moran | Spatial autocorrelation of physicochemical properties | 24 |
 | NMBroto | Normalized Moreau-Broto | 24 |
 | PAAC | Pseudo-amino acid composition | 23 |
-| PseKRAAC_type_1 | Pseudo K-tuple reduced amino acids composition type 1 | 4 |
-| PseKRAAC_type_2 | Pseudo K-tuple reduced amino acids composition type 2 | 4 |
-| PseKRAAC_type_3A | Pseudo K-tuple reduced amino acids composition type 3A | 4 |
-| PseKRAAC_type_3B | Pseudo K-tuple reduced amino acids composition type 3B | 4 |
-| PseKRAAC_type_4 | Pseudo K-tuple reduced amino acids composition type 4 | 25 |
-| PseKRAAC_type_5 | Pseudo K-tuple reduced amino acids composition type 5 | 9 |
-| PseKRAAC_type_6A | Pseudo K-tuple reduced amino acids composition type 6A | 16 |
-| PseKRAAC_type_6B | Pseudo K-tuple reduced amino acids composition type 6B | 25 |
-| PseKRAAC_type_6C | Pseudo K-tuple reduced amino acids composition type 6C | 25 |
-| PseKRAAC_type_7 | Pseudo K-tuple reduced amino acids composition type 7 | 4 |
-| PseKRAAC_type_8 | Pseudo K-tuple reduced amino acids composition type 8 | 4 |
-| PseKRAAC_type_9 | Pseudo K-tuple reduced amino acids composition type 9 | 4 |
-| PseKRAAC_type_10 | Pseudo K-tuple reduced amino acids composition type 10 | 4 |
-| PseKRAAC_type_11 | Pseudo K-tuple reduced amino acids composition type 11 | 4 |
-| PseKRAAC_type_12 | Pseudo K-tuple reduced amino acids composition type 12 | 4 |
-| PseKRAAC_type_13 | Pseudo K-tuple reduced amino acids composition type 13 | 16 |
-| PseKRAAC_type_14 | Pseudo K-tuple reduced amino acids composition type 14 | 4 |
-| PseKRAAC_type_15 | Pseudo K-tuple reduced amino acids composition type 15 | 4 |
-| PseKRAAC_type_16 | Pseudo K-tuple reduced amino acids composition type 16 | 4 |
+| PseKRAAC_type_1 | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_2 | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_3A | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_3B | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_4 | Pseudo K-tuple reduced amino acids composition | 25 |
+| PseKRAAC_type_5 | Pseudo K-tuple reduced amino acids composition | 9 |
+| PseKRAAC_type_6A | Pseudo K-tuple reduced amino acids composition | 16 |
+| PseKRAAC_type_6B | Pseudo K-tuple reduced amino acids composition | 25 |
+| PseKRAAC_type_6C | Pseudo K-tuple reduced amino acids composition | 25 |
+| PseKRAAC_type_7 | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_8 | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_9 | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_10 | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_11 | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_12 | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_13 | Pseudo K-tuple reduced amino acids composition | 16 |
+| PseKRAAC_type_14 | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_15 | Pseudo K-tuple reduced amino acids composition | 4 |
+| PseKRAAC_type_16 | Pseudo K-tuple reduced amino acids composition | 4 |
 | QSOrder | Quasi-sequence-order descriptors (nlag=13) | 46 |
 | SOCNumber | Sequence-order-coupling number | 6 |
 | TPC_type_1 | Tripeptide composition - normalized | 8000  |
