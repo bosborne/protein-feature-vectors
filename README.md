@@ -55,8 +55,9 @@ print(calc.encodings)
 | CC | Cross covariance | 168 |
 | CKSAAGP_type_1 | Composition of k-spaced amino acid group pairs - normalized | 100 |
 | CKSAAGP_type_2 | Composition of k-spaced amino acid group pairs - raw count | 100 |
-| CKSAAP_type_1 | k-spaced amino acid pairs, k = 0, 1, 2, and 3 - normalized | 1600 |
-| CKSAAP_type_2 | k-spaced amino acid pairs, k = 0, 1, 2, and 3 - raw count | 1600 |
+| CKSAAP_type_1 | k-spaced amino acid pairs, k = 0,1,2,3 - normalized | 1600 |
+| CKSAAP_type_2 | k-spaced amino acid pairs, k = 0,1,2,3 - raw count | 1600 |
+| CKSAAP_type_3 | k-spaced amino acid pairs, k = 0,1,2,3 - normalized, rounded count | 1600 |
 | CTDC | Composition | 39 |
 | CTDD | Distribution | 195 |
 | CTDT | Transition | 39 |
@@ -71,7 +72,7 @@ print(calc.encodings)
 | Geary | Spatial autocorrelation of physicochemical properties | 24 |
 | GTPC_type_1 | Grouped tripeptide composition - normalized | 125 |
 | GTPC_type_2 | Grouped tripeptide composition - raw count | 125 |
-| KSCTriad | CTriad varied by spacing of 0, 1 or 2, or 3 | 1372 |
+| KSCTriad | k-spaced CTriad, k = 0,1,2,3 | 1372 |
 | Moran | Spatial autocorrelation of physicochemical properties | 24 |
 | NMBroto | Normalized Moreau-Broto | 24 |
 | PAAC | Pseudo-amino acid composition | 23 |
