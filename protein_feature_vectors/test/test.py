@@ -40,6 +40,7 @@ for alg in [
     "CKSAAGP_type_2",
     "CKSAAP_type_1",
     "CKSAAP_type_2",
+    "CKSAAP_type_3",
     "CTDC",
     "CTDD",
     "CTDT",
@@ -84,6 +85,6 @@ for alg in [
     "TPC_type_3",
 ]:
     proteins.get_feature_vectors(alg, pdict=seqs)
-    print(proteins.encodings)
+    print(proteins.encodings, "\n")
     assert isinstance(proteins.encodings, pd.DataFrame)
     assert proteins.encodings.shape[0] == 2

@@ -52,8 +52,9 @@ class Calculator:
             "CC": "self._CC()",
             "CKSAAGP_type_1": "self._CKSAAGP(normalized=True)",
             "CKSAAGP_type_2": "self._CKSAAGP(normalized=False)",
-            "CKSAAP_type_1": "self._CKSAAP(normalized=True)",
-            "CKSAAP_type_2": "self._CKSAAP(normalized=False)",
+            "CKSAAP_type_1": "self._CKSAAP(type=1)",  # normalized=True
+            "CKSAAP_type_2": "self._CKSAAP(type=2)",  # normalized=False
+            "CKSAAP_type_3": "self._CKSAAP(type=3)",
             "CTDC": "self._CTDC()",
             "CTDD": "self._CTDD()",
             "CTDT": "self._CTDT()",
@@ -200,10 +201,11 @@ class Calculator:
         APAAC                                              Amphiphilic PAAC
         ASDC                                               Adaptive skip dipeptide composition
         CC                                                 Cross covariance
-        CKSAAGP_type_1                                     Composition of k-spaced amino acid group pairs type 1- normalized
-        CKSAAGP_type_2                                     Composition of k-spaced amino acid group pairs type 2- raw count
-        CKSAAP_type_1                                      Composition of k-spaced amino acid pairs type 1 - normalized
-        CKSAAP_type_2                                      Composition of k-spaced amino acid pairs type 2 - raw count
+        CKSAAGP_type_1                                     Composition of k-spaced amino acid group pairs type 1 - normalized
+        CKSAAGP_type_2                                     Composition of k-spaced amino acid group pairs type 2 - raw count
+        CKSAAP_type_1                                      Composition of k-spaced amino acid pairs - normalized
+        CKSAAP_type_2                                      Composition of k-spaced amino acid pairs - raw count
+        CKSAAP_type_3                                      Composition of k-spaced amino acid pairs - normalized, rounded count
         CTDC                                               Composition
         CTDD                                               Distribution
         CTDT                                               Transition
@@ -243,9 +245,9 @@ class Calculator:
         PseKRAAC_type_16                                   Pseudo K-tuple reduced amino acids composition type 16        
         QSOrder                                            Quasi-sequence-order descriptors
         SOCNumber                                          Sequence-order-coupling number
-        TPC_type_1                                         Tripeptide composition type 1 - normalized
-        TPC_type_2                                         Tripeptide composition type 2 - raw count
-        TPC_type_3                                         Tripeptide composition type 3 - normalized, rounded count
+        TPC_type_1                                         Tripeptide composition - normalized
+        TPC_type_2                                         Tripeptide composition - raw count
+        TPC_type_3                                         Tripeptide composition - normalized, rounded count
         """
         print(info)
 
@@ -331,7 +333,7 @@ class Calculator:
             self.error_msg = str(e)
             return False
 
-    def _CKSAAP(self, normalized=True):
+    def _CKSAAP(self, type=None):
         try:
             AA = "ACDEFGHIKLMNPQRSTVWY"
             encodings = []
@@ -366,10 +368,17 @@ class Calculator:
                             )
                             sum = sum + 1
                     for pair in aaPairs:
-                        if normalized:
+                        if type == 1:
                             code.append(myDict[pair] / sum)
-                        else:
+                        elif type == 2:
                             code.append(myDict[pair])
+                        elif type == 3:
+                            code.append(
+                                round(
+                                    (myDict[pair] * (1000 / len(sequence))),
+                                    1,
+                                )
+                            )
                 encodings.append(code)
             encodings = np.array(encodings)
             self.encodings = pd.DataFrame(
