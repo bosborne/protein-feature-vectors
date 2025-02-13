@@ -15,9 +15,9 @@ This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/i
 ## Installation
 
 ```sh
-  git clone git@github.com:bosborne/protein-feature-vectors.git
-  cd protein-feature-vectors
-  pip3 install .
+git clone git@github.com:bosborne/protein-feature-vectors.git
+cd protein-feature-vectors
+pip3 install .
 ```
 
 ## Usage
