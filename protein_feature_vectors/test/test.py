@@ -85,6 +85,6 @@ for alg in [
     "TPC_type_3",
 ]:
     proteins.get_feature_vectors(alg, pdict=seqs)
-    print(proteins.encodings, "\n")
+    print(alg, "\n", proteins.encodings, "\n")
     assert isinstance(proteins.encodings, pd.DataFrame)
     assert proteins.encodings.shape[0] == 2

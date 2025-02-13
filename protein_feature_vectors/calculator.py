@@ -1156,9 +1156,6 @@ class Calculator:
         try:
             property_name = self.__default_para["aaindex"].split(";")
             nlag = self.__default_para["nlag"]
-            # if self.minimum_length_without_minus < nlag + 1:
-            #     self.error_msg = "The nlag value is too large."
-            #     return False
             try:
                 data_file = os.path.join(
                     os.path.split(os.path.realpath(__file__))[0],
@@ -1189,6 +1186,9 @@ class Calculator:
             encodings.append(header)
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
+                if len(sequence) < nlag + 1:
+                    print(f"{name} sequence is too short for AC")
+                    continue
                 code = [name]
                 L = len(sequence)
                 for p_name in property_name:
