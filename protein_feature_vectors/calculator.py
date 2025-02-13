@@ -11,22 +11,22 @@ from Bio.SeqIO.FastaIO import FastaIterator
 
 class Calculator:
     """
-    >>> from protein_feature_vectors import Calculator
+    from protein_feature_vectors import Calculator
 
     # create a instance
-    >>> calc = Calculator()
+    calc = Calculator()
 
     # display available methods
-    >>> calc.display_feature_types()
+    calc.display_feature_types()
 
     # calculate feature vectors
-    >>> calc.get_feature_vectors("AAC", file="./data_examples/multi.fa")
+    calc.get_feature_vectors("AAC", file="./data_examples/multi.fa")
 
     # display the feature vectors
-    >>> print(calc.encodings)
+    print(calc.encodings)
 
     # save feature vectors
-    >>> calc.to_csv("AAC.csv", "index=False", header=False)
+    calc.to_csv("AAC.csv", "index=False", header=False)
     """
 
     def __init__(self):
