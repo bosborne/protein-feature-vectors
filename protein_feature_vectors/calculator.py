@@ -372,6 +372,8 @@ class Calculator:
                             code.append(myDict[pair] / sum)
                         elif type == 2:
                             code.append(myDict[pair])
+                        # If the multiplier is 1000 the F1 score drops dramaticaly.
+                        # Example values now: 2.8, 1.7, 0.4
                         elif type == 3:
                             code.append(
                                 round(
