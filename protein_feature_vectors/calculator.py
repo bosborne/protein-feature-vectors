@@ -375,7 +375,7 @@ class Calculator:
                         elif type == 3:
                             code.append(
                                 round(
-                                    (myDict[pair] * (1000 / len(sequence))),
+                                    (myDict[pair] * (100 / len(sequence))),
                                     1,
                                 )
                             )
