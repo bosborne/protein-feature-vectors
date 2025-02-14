@@ -32,6 +32,9 @@ class Calculator:
     def __init__(self, verbose=False):
         self.fasta_list = None
         self.verbose = verbose
+        self.datadir = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)), "data"
+        )
         self.import_parameters("Protein_parameters_setting.json")
         self.__default_para = {
             "sliding_window": 5,
@@ -808,11 +811,7 @@ class Calculator:
                 )
                 return False
             AA = "ARNDCQEGHILKMFPSTWYV"
-            fileAAindex = os.path.join(
-                os.path.split(os.path.realpath(__file__))[0],
-                "data",
-                "AAindex.txt",
-            )
+            fileAAindex = os.path.join(self.datadir, "AAindex.txt")
             with open(fileAAindex) as f:
                 records = f.readlines()[1:]
             AAindex = []
@@ -871,11 +870,7 @@ class Calculator:
             props = self.__default_para["aaindex"].split(";")
             nlag = self.__default_para["nlag"]
             AA = "ARNDCQEGHILKMFPSTWYV"
-            fileAAidx = os.path.join(
-                os.path.split(os.path.realpath(__file__))[0],
-                "data",
-                "AAidx.txt",
-            )
+            fileAAidx = os.path.join(self.datadir, "AAidx.txt")
             with open(fileAAidx) as f:
                 records = f.readlines()[1:]
             myDict = {}
@@ -950,11 +945,7 @@ class Calculator:
             props = self.__default_para["aaindex"].split(";")
             nlag = self.__default_para["nlag"]
             AA = "ARNDCQEGHILKMFPSTWYV"
-            fileAAidx = os.path.join(
-                os.path.split(os.path.realpath(__file__))[0],
-                "data",
-                "AAidx.txt",
-            )
+            fileAAidx = os.path.join(self.datadir, "AAidx.txt")
             with open(fileAAidx) as f:
                 records = f.readlines()[1:]
             myDict = {}
@@ -1056,8 +1047,7 @@ class Calculator:
             props = self.__default_para["aaindex"].split(";")
             nlag = self.__default_para["nlag"]
             fileAAidx = os.path.join(
-                os.path.split(os.path.realpath(__file__))[0],
-                "data",
+                self.datadir,
                 "AAidx.txt",
             )
             AA = "ARNDCQEGHILKMFPSTWYV"
@@ -1175,11 +1165,7 @@ class Calculator:
             property_name = self.__default_para["aaindex"].split(";")
             nlag = self.__default_para["nlag"]
             try:
-                data_file = os.path.join(
-                    os.path.split(os.path.realpath(__file__))[0],
-                    "data",
-                    "AAindex.data",
-                )
+                data_file = os.path.join(self.datadir, "AAindex.data")
                 with open(data_file, "rb") as handle:
                     property_dict = pickle.load(handle)
             except Exception as e:
@@ -1266,11 +1252,7 @@ class Calculator:
             #     self.error_msg = "The nlag value is too large."
             #     return False
             try:
-                data_file = os.path.join(
-                    os.path.split(os.path.realpath(__file__))[0],
-                    "data",
-                    "AAindex.data",
-                )
+                data_file = os.path.join(self.datadir, "AAindex.data")
                 with open(data_file, "rb") as handle:
                     property_dict = pickle.load(handle)
             except Exception as e:
@@ -1366,11 +1348,7 @@ class Calculator:
             #     self.error_msg = "The nlag value is too large."
             #     return False
             try:
-                data_file = os.path.join(
-                    os.path.split(os.path.realpath(__file__))[0],
-                    "data",
-                    "AAindex.data",
-                )
+                data_file = os.path.join(self.datadir, "AAindex.data")
                 with open(data_file, "rb") as handle:
                     property_dict = pickle.load(handle)
             except Exception as e:
@@ -1940,16 +1918,8 @@ class Calculator:
     def _SOCNumber(self):
         try:
             nlag = self.__default_para["nlag"]
-            dataFile = os.path.join(
-                os.path.split(os.path.realpath(__file__))[0],
-                "data",
-                "Schneider-Wrede.txt",
-            )
-            dataFile1 = os.path.join(
-                os.path.split(os.path.realpath(__file__))[0],
-                "data",
-                "Grantham.txt",
-            )
+            dataFile = os.path.join(self.datadir, "Schneider-Wrede.txt")
+            dataFile1 = os.path.join(self.datadir, "Grantham.txt")
             AA = "ACDEFGHIKLMNPQRSTVWY"
             AA1 = "ARNDCQEGHILKMFPSTWYV"
             DictAA = {}
@@ -2038,16 +2008,8 @@ class Calculator:
         # if nlag > self.minimum_length_without_minus - 1:
         #     self.error_msg = "The lag value is out of range."
         #     return False
-        dataFile0 = os.path.join(
-            os.path.split(os.path.realpath(__file__))[0],
-            "data",
-            "Schneider-Wrede.txt",
-        )
-        dataFile1 = os.path.join(
-            os.path.split(os.path.realpath(__file__))[0],
-            "data",
-            "Grantham.txt",
-        )
+        dataFile0 = os.path.join(self.datadir, "Schneider-Wrede.txt")
+        dataFile1 = os.path.join(self.datadir, "Grantham.txt")
         AA = "ACDEFGHIKLMNPQRSTVWY"
         AA1 = "ARNDCQEGHILKMFPSTWYV"
         DictAA = {}
@@ -2160,11 +2122,7 @@ class Calculator:
             #     self.error_msg = "The lambda value is out of range."
             #     return False
             w = self.__default_para["weight"]
-            dataFile = os.path.join(
-                os.path.split(os.path.realpath(__file__))[0],
-                "data",
-                "PAAC.txt",
-            )
+            dataFile = os.path.join(self.datadir, "PAAC.txt")
             with open(dataFile) as f:
                 records = f.readlines()
             AA = "".join(records[0].rstrip().split()[1:])
@@ -2195,6 +2153,12 @@ class Calculator:
             encodings.append(header)
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
+                if len(sequence) < lambdaValue + 1:
+                    if self.verbose:
+                        print(
+                            f"PAAC requires sequence length > lambdaValue+1: {str(lambdaValue + 1)}"
+                        )
+                        continue
                 code = [name]
                 theta = []
                 for n in range(1, lambdaValue + 1):
@@ -2236,11 +2200,7 @@ class Calculator:
             #     self.error_msg = "The lambda value is out of range."
             #     return False
             w = self.__default_para["weight"]
-            dataFile = os.path.join(
-                os.path.split(os.path.realpath(__file__))[0],
-                "data",
-                "PAAC.txt",
-            )
+            dataFile = os.path.join(self.datadir, "PAAC.txt")
             with open(dataFile) as f:
                 records = f.readlines()
             AA = "".join(records[0].rstrip().split()[1:])
