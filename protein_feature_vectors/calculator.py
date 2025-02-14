@@ -907,7 +907,7 @@ class Calculator:
                 if len(sequence) <= nlag + 1:
                     if self.verbose:
                         print(
-                            f"NMBroto requires sequence length > nlag+1: {str(nlag + 1)}"
+                            f"Skipping {name} NMBroto requires sequence length > nlag+1: {str(nlag + 1)}"
                         )
                         continue
                 code = [name]
@@ -979,12 +979,12 @@ class Calculator:
             encodings.append(header)
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
-                if self.verbose:
-                    print(f"Name: {name} Sequence: {sequence}")
+                # if self.verbose:
+                #     print(f"Name: {name} Sequence: {sequence}")
                 if len(sequence) <= nlag + 1:
                     if self.verbose:
                         print(
-                            f"Moran requires sequence length > nlag+1: {str(nlag + 1)}"
+                            f"Skipping {name} Moran requires sequence length > nlag+1: {str(nlag + 1)}"
                         )
                         continue
                 code = [name]
