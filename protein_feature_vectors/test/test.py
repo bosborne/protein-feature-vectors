@@ -9,9 +9,7 @@ from calculator import Calculator  # noqa: E402
 
 proteins = Calculator()
 proteins.display_feature_types()
-proteins.get_feature_vectors(
-    "TPC_type_2", file=f"{srcdir}/data_examples/multi.fa"
-)
+proteins.get_feature_vectors("Moran", file=f"{srcdir}/data_examples/multi.fa")
 assert isinstance(proteins.encodings, pd.DataFrame)
 assert proteins.encodings.shape[0] == 3
 

@@ -29,8 +29,9 @@ class Calculator:
     calc.to_csv("AAC.csv", index=False, header=False)
     """
 
-    def __init__(self):
+    def __init__(self, verbose=False):
         self.fasta_list = None
+        self.verbose = verbose
         self.import_parameters("Protein_parameters_setting.json")
         self.__default_para = {
             "sliding_window": 5,
@@ -185,7 +186,8 @@ class Calculator:
             if len(result) == 0:
                 standardized.append([fasta[0], seqstr])
             else:
-                print(f"Non-standard aa in {fasta[0]}: {result}")
+                if self.verbose:
+                    print(f"Non-standard aa in {fasta[0]}: {result}")
         self.fasta_list = standardized
 
     def check_for_nonstandard(self, seqstr):
@@ -907,6 +909,12 @@ class Calculator:
             encodings.append(header)
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
+                if len(sequence) <= nlag + 1:
+                    if self.verbose:
+                        print(
+                            f"NMBroto requires sequence length > nlag+1: {str(nlag + 1)}"
+                        )
+                        continue
                 code = [name]
                 N = len(sequence)
                 for prop in range(len(props)):
@@ -980,6 +988,14 @@ class Calculator:
             encodings.append(header)
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
+                if self.verbose:
+                    print(f"Name: {name} Sequence: {sequence}")
+                if len(sequence) <= nlag + 1:
+                    if self.verbose:
+                        print(
+                            f"Moran requires sequence length > nlag+1: {str(nlag + 1)}"
+                        )
+                        continue
                 code = [name]
                 N = len(sequence)
                 for prop in range(len(props)):
