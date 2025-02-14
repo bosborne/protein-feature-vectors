@@ -26,7 +26,7 @@ class Calculator:
     print(calc.encodings)
 
     # save feature vectors
-    calc.to_csv("AAC.csv", "index=False", header=False)
+    calc.to_csv("AAC.csv", index=False, header=False)
     """
 
     def __init__(self):

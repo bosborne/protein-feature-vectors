@@ -30,7 +30,7 @@ calc = Calculator()
 calc.display_feature_types()
 calc.get_feature_vectors("CTriad", file='data_examples/multi.fa')
 print(calc.encodings)
-calc.to_csv("CTriad.csv", "index=False", header=False)
+calc.to_csv("CTriad.csv", index=False, header=False)
 ```
 
 Sequences from a dict:
