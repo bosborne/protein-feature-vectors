@@ -190,7 +190,7 @@ class Calculator:
                 standardized.append([fasta[0], seqstr])
             else:
                 if self.verbose:
-                    print(f"Non-standard aa in {fasta[0]}: {result}")
+                    print(f"Skipping {fasta[0]} non-standard aa: {result}")
         self.fasta_list = standardized
 
     def check_for_nonstandard(self, seqstr):
