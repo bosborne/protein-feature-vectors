@@ -31,6 +31,7 @@ class Calculator:
 
     def __init__(self, verbose=False):
         self.fasta_list = None
+        self.vector_length = dict()
         self.verbose = verbose
         self.datadir = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "data"
@@ -177,6 +178,12 @@ class Calculator:
         # Run the command
         cmd = self.__cmd_dict[descriptor]
         eval(cmd)
+        if len(self.encodings > 0):
+            self.vector_length[descriptor] = self.encodings.shape[1]
+            if self.verbose:
+                print(
+                    f"{descriptor} vector length: {self.vector_length[descriptor]}"
+                )
 
     def validate(self):
         """validate
@@ -226,8 +233,8 @@ class Calculator:
         GTPC_type_1                                        Grouped tripeptide composition type 1 - normalized
         GTPC_type_2                                        Grouped tripeptide composition type 1 - raw count
         KSCTriad                                           Conjoint k-spaced triad
-        Moran                                              Moran
-        NMBroto                                            Normalized Moreau-Broto
+        Moran                                              Correlation between neighboring residues based on physicochemical properties
+        NMBroto                                            Correlation between neighboring residues based on physicochemical properties
         PAAC                                               Pseudo-amino acid composition
         PseKRAAC_type_1                                    Pseudo K-tuple reduced amino acids composition type 1
         PseKRAAC_type_2                                    Pseudo K-tuple reduced amino acids composition type 2
@@ -1191,7 +1198,8 @@ class Calculator:
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
                 if len(sequence) < nlag + 1:
-                    print(f"{name} sequence is too short for AC")
+                    if self.verbose:
+                        f"AC requires sequence length > nlag + 1: {str(nlag + 1)}"
                     continue
                 code = [name]
                 L = len(sequence)
@@ -1248,9 +1256,6 @@ class Calculator:
                 self.error_msg = "More than two property should be selected for this descriptor."
                 return False
             nlag = self.__default_para["nlag"]
-            # if self.minimum_length_without_minus < nlag + 1:
-            #     self.error_msg = "The nlag value is too large."
-            #     return False
             try:
                 data_file = os.path.join(self.datadir, "AAindex.data")
                 with open(data_file, "rb") as handle:
@@ -1280,6 +1285,10 @@ class Calculator:
             encodings.append(header)
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
+                if len(sequence) < nlag + 1:
+                    if self.verbose:
+                        f"CC requires sequence length > nlag + 1: {str(nlag + 1)}"
+                    continue
                 code = [name]
                 L = len(sequence)
                 for pair in property_pairs:
@@ -1344,9 +1353,6 @@ class Calculator:
                 self.error_msg = "More than two property should be selected for this descriptor."
                 return False
             nlag = self.__default_para["nlag"]
-            # if self.minimum_length_without_minus < nlag + 1:
-            #     self.error_msg = "The nlag value is too large."
-            #     return False
             try:
                 data_file = os.path.join(self.datadir, "AAindex.data")
                 with open(data_file, "rb") as handle:
@@ -1379,6 +1385,12 @@ class Calculator:
             encodings.append(header)
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
+                if len(sequence) < nlag + 1:
+                    if self.verbose:
+                        print(
+                            f"ACC requires sequence length > nlag + 1: {str(nlag + 1)}"
+                        )
+                        continue
                 code = [name]
                 L = len(sequence)
                 for p_name in property_name:
@@ -1846,9 +1858,10 @@ class Calculator:
         encodings.append(header)
         for i in self.fasta_list:
             name, sequence = i[0], i[1]
-            # if len(sequence) < 30:
-            #     print(f"CTriad needs sequence with length > 30 {name}")
-            #     continue
+            if len(sequence) < 30:
+                if self.verbose:
+                    print(f"CTriad needs sequence with length > 30 {name}")
+                continue
             code = [name]
             code = code + self.CalculateKSCTriad(sequence, 0, features, AADict)
             encodings.append(code)
@@ -1859,9 +1872,6 @@ class Calculator:
             index=encodings[1:, 0],
         )
         return True
-        # except Exception as e:
-        #     self.error_msg = str(e)
-        #     return False
 
     def _KSCTriad(self):
         try:
@@ -1895,11 +1905,12 @@ class Calculator:
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
                 code = [name]
-                # if len(sequence) < 2 * gap + 3:
-                #     print(
-                #         f"Error: for KSCTriad encoding {name} sequence should be > (2*gap+3)"
-                #     )
-                #     continue
+                if len(sequence) < 2 * gap + 3:
+                    if self.verbose:
+                        print(
+                            f"KSCTriad encoding {name} sequence should be > (2*gap+3)"
+                        )
+                    continue
                 code = code + self.CalculateKSCTriad(
                     sequence, gap, features, AADict
                 )
