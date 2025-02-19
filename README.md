@@ -30,7 +30,7 @@ calc = Calculator()
 calc.display_feature_types()
 calc.get_feature_vectors("CTriad", file='data_examples/multi.fa')
 print(calc.encodings)
-# Get ids and values from the DataFrame as a Series
+# Get ids and values from the DataFrame as Series objects
 protein_ids = [x[0] for x in calc.encodings.iterrows()]
 values = [x[1].tolist() for x in calc.encodings.iterrows()]
 calc.to_csv("CTriad.csv", index=True, header=True)
