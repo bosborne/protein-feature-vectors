@@ -5,8 +5,8 @@ import math
 import pickle
 import numpy as np
 import pandas as pd
+import fastapy
 from collections import Counter
-from Bio.SeqIO.FastaIO import FastaIterator
 
 
 class Calculator:
@@ -116,9 +116,8 @@ class Calculator:
         fasta_sequences = []
         if not os.path.exists(self.file):
             sys.exit(f"Error: cannot find file '{self.file}'")
-        with open(self.file, "r") as handle:
-            for record in FastaIterator(handle):
-                fasta_sequences.append([record.id, str(record.seq).upper()])
+        for record in fastapy.parse(self.file):
+            fasta_sequences.append([record.id, str(record.seq).upper()])
 
         self.fasta_list = fasta_sequences
 
