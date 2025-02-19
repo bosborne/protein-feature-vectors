@@ -34,9 +34,9 @@ class Calculator:
     """
 
     def __init__(self, verbose=False):
-        self.fasta_list = None
-        self.vector_length = dict()
         self.verbose = verbose
+        self.fasta_list = None
+        self.vector_length = None
         self.datadir = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "data"
         )
@@ -107,8 +107,6 @@ class Calculator:
             "TPC_type_2": "self._TPC(type=2)",
             "TPC_type_3": "self._TPC(type=3)",
         }
-        self.minimum_length_without_minus = 1
-        self.maximum_length_without_minus = 0
 
     def read_fasta(self):
         """read_fasta
