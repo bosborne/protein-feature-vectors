@@ -109,9 +109,9 @@ class Calculator:
     def read_fasta(self):
         """read_fasta
         >>>calc.fasta_list
-        [['H6SH45', 'FFRENLAFQQREARKFSS....DLIAEIQKQGQGQWTYQIYQE'],
-        ['9HIV1', 'DFWEVQLGIPHP...YQEIVTLTEEAELELAENREI'],
-        ['H6SH45_9HIV1', 'FFRENLAFQQREARKF...WTYQIYQEIVTLTEEAELELAENREI']]
+        [['H6SH45', 'MFFRENLAFQQREARKFSS....DLIAEIQKQGQGQWTYQIYQE'],
+        ['9HIV1', 'MDFWEVQLGIPHP...YQEIVTLTEEAELELAENREI'],
+        ['H6SH45_9HIV1', 'MFFRENLAFQQREARKF...WTYQIYQEIELELAENREI']]
         """
         fasta_sequences = []
         if not os.path.exists(self.file):
