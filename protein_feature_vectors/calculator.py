@@ -533,7 +533,7 @@ class Calculator:
             try:
                 name, sequence = i[0], i[1]
                 if len(sequence) < 3:
-                    print(f"'{name}' sequence is less than 3, skipping")
+                    print(f"Skipping {name} TPC sequence is less than 3")
                     continue
                 code = [name]
                 tmpCode = [0] * 8000
