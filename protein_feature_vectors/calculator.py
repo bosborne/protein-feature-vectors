@@ -2246,7 +2246,7 @@ class Calculator:
                 if lambdaValue > len(sequence) - 1:
                     if self.verbose:
                         print(
-                            f"Skipping {name} APAAC requires sequence length > lambdaValue > len(sequence) - 1 {str(lambdaValue)}"
+                            f"Skipping {name} APAAC requires sequence length - 1 > lambdaValue: {str(lambdaValue)}"
                         )
                     continue
                 code = [name]
