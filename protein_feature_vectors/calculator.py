@@ -291,6 +291,7 @@ class Calculator:
             self.error_msg = str(e)
             return False
 
+    """
     def _EAAC(self):
         try:
             if not self.is_equal:
@@ -344,6 +345,7 @@ class Calculator:
         except Exception as e:
             self.error_msg = str(e)
             return False
+    """
 
     def _CKSAAP(self, type=None):
         try:
@@ -808,6 +810,7 @@ class Calculator:
             self.error_msg = str(e)
             return False
 
+    """
     def _AAIndex(self):
         try:
             props = self.__default_para["aaindex"].split(";")
@@ -871,6 +874,7 @@ class Calculator:
         except Exception as e:
             self.error_msg = str(e)
             return False
+    """
 
     def _NMBroto(self):
         try:
@@ -986,8 +990,6 @@ class Calculator:
             encodings.append(header)
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
-                # if self.verbose:
-                #     print(f"Name: {name} Sequence: {sequence}")
                 if len(sequence) <= nlag + 1:
                     if self.verbose:
                         print(
@@ -1199,7 +1201,7 @@ class Calculator:
                 name, sequence = i[0], i[1]
                 if len(sequence) < nlag + 1:
                     if self.verbose:
-                        f"AC requires sequence length > nlag + 1: {str(nlag + 1)}"
+                        f"Skipping {name} AC requires sequence length > nlag + 1: {str(nlag + 1)}"
                     continue
                 code = [name]
                 L = len(sequence)
@@ -1287,7 +1289,7 @@ class Calculator:
                 name, sequence = i[0], i[1]
                 if len(sequence) < nlag + 1:
                     if self.verbose:
-                        f"CC requires sequence length > nlag + 1: {str(nlag + 1)}"
+                        f"Skipping {name} CC requires sequence length > nlag + 1: {str(nlag + 1)}"
                     continue
                 code = [name]
                 L = len(sequence)
@@ -1388,7 +1390,7 @@ class Calculator:
                 if len(sequence) < nlag + 1:
                     if self.verbose:
                         print(
-                            f"ACC requires sequence length > nlag + 1: {str(nlag + 1)}"
+                            f"Skipping {name} ACC requires sequence length > nlag + 1: {str(nlag + 1)}"
                         )
                         continue
                 code = [name]
@@ -1860,7 +1862,9 @@ class Calculator:
             name, sequence = i[0], i[1]
             if len(sequence) < 30:
                 if self.verbose:
-                    print(f"CTriad needs sequence with length > 30 {name}")
+                    print(
+                        f"Skipping {name} CTriad needs sequence with length > 30 {name}"
+                    )
                 continue
             code = [name]
             code = code + self.CalculateKSCTriad(sequence, 0, features, AADict)
@@ -1908,7 +1912,7 @@ class Calculator:
                 if len(sequence) < 2 * gap + 3:
                     if self.verbose:
                         print(
-                            f"KSCTriad encoding {name} sequence should be > (2*gap+3)"
+                            f"Skipping {name} KSCTriand sequence should be > (2*gap+3)"
                         )
                     continue
                 code = code + self.CalculateKSCTriad(
@@ -2016,9 +2020,6 @@ class Calculator:
     def _QSOrder(self):
         nlag = self.__default_para["nlag"]
         w = self.__default_para["weight"]
-        # if nlag > self.minimum_length_without_minus - 1:
-        #     self.error_msg = "The lag value is out of range."
-        #     return False
         dataFile0 = os.path.join(self.datadir, "Schneider-Wrede.txt")
         dataFile1 = os.path.join(self.datadir, "Grantham.txt")
         AA = "ACDEFGHIKLMNPQRSTVWY"
@@ -2069,6 +2070,11 @@ class Calculator:
         try:
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
+                if nlag > len(sequence) - 1:
+                    print(
+                        f"Skipping {name} QSOrder requires nlag > sequence length - 1: {str(nlag)}"
+                    )
+                    continue
                 code = [name]
                 arraySW = []
                 arrayGM = []
@@ -2129,9 +2135,6 @@ class Calculator:
     def _PAAC(self):
         try:
             lambdaValue = self.__default_para["lambdaValue"]
-            # if lambdaValue > self.minimum_length_without_minus - 1:
-            #     self.error_msg = "The lambda value is out of range."
-            #     return False
             w = self.__default_para["weight"]
             dataFile = os.path.join(self.datadir, "PAAC.txt")
             with open(dataFile) as f:
@@ -2167,7 +2170,7 @@ class Calculator:
                 if len(sequence) < lambdaValue + 1:
                     if self.verbose:
                         print(
-                            f"PAAC requires sequence length > lambdaValue+1: {str(lambdaValue + 1)}"
+                            f"Skipping {name} PAAC requires sequence length > lambdaValue+1: {str(lambdaValue + 1)}"
                         )
                         continue
                 code = [name]
@@ -2207,9 +2210,6 @@ class Calculator:
     def _APAAC(self):
         try:
             lambdaValue = self.__default_para["lambdaValue"]
-            # if lambdaValue > self.minimum_length_without_minus - 1:
-            #     self.error_msg = "The lambda value is out of range."
-            #     return False
             w = self.__default_para["weight"]
             dataFile = os.path.join(self.datadir, "PAAC.txt")
             with open(dataFile) as f:
@@ -2243,6 +2243,12 @@ class Calculator:
             encodings.append(header)
             for i in self.fasta_list:
                 name, sequence = i[0], i[1]
+                if lambdaValue > len(sequence) - 1:
+                    if self.verbose:
+                        print(
+                            f"Skipping {name} APAAC requires sequence length > lambdaValue > len(sequence) - 1 {str(lambdaValue)}"
+                        )
+                    continue
                 code = [name]
                 theta = []
                 for n in range(1, lambdaValue + 1):
@@ -2410,9 +2416,6 @@ class Calculator:
             cp13_AA = "ACDEFGHIKNSTV"
             distance = self.__default_para["distance"]
             cp = self.__default_para["cp"]
-            # if self.minimum_length_without_minus < distance + 1:
-            #     self.error_msg = "The distance value is too large."
-            #     return False
             AA = cp20_AA
             AA_dict = cp20_dict
             if cp == "cp(19)":
@@ -2442,6 +2445,12 @@ class Calculator:
             encodings.append(header)
             for elem in self.fasta_list:
                 name, sequence = elem[0], elem[1]
+                if len(sequence) < distance + 1:
+                    if self.verbose:
+                        print(
+                            f"Skipping {name} DistancePair requires sequence length > distance+1: {str(distance + 1)}"
+                        )
+                    continue
                 code = [name]
                 for d in range(distance + 1):
                     if d == 0:
