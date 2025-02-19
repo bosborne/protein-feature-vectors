@@ -8,7 +8,7 @@ This package is derived from [iFeatureOmega-CLI](https://github.com/Superzchen/i
 
 - It only makes feature vectors using protein sequence (not based on DNA, RNA, or compounds)
 - It only makes fixed-length feature vectors
-- It has fewer dependencies than iFeatureOmega-CLI
+- It has fewer dependencies than iFeatureOmega-CLI (i.e. numpy, pandas, [fastapy](https://github.com/aziele/fastapy))
 - It just creates feature vectors and has no other plotting or analytical capabilities
 - It has additional variants of specific algorithms (e.g. TPC_type_3, CKSAAP_type_3) created for faster Deep Learning
 
