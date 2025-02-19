@@ -33,7 +33,7 @@ print(calc.encodings)
 # Get ids and values from the DataFrame
 protein_ids = [x[0] for x in calc.encodings.iterrows()]
 values = [x[1].tolist() for x in calc.encodings.iterrows()]
-calc.to_csv("CTriad.csv", index=False, header=False)
+calc.to_csv("CTriad.csv", index=True, header=True)
 ```
 
 Sequences from a dict:
