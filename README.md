@@ -73,8 +73,8 @@ print(calc.encodings)
 | GTPC_type_1 | Grouped tripeptide composition - normalized | 125 |
 | GTPC_type_2 | Grouped tripeptide composition - raw count | 125 |
 | KSCTriad | k-spaced CTriad, k = 0,1,2,3 | 1372 |
-| Moran | Spatial autocorrelation of physicochemical properties | 24 |
-| NMBroto | Normalized Moreau-Broto | 24 |
+| Moran | Spatial autocorrelation of physicochemical properties | 240 |
+| NMBroto | Normalized Moreau-Broto | 240 |
 | PAAC | Pseudo-amino acid composition | 23 |
 | PseKRAAC_type_1 | Pseudo K-tuple reduced amino acids composition | 4 |
 | PseKRAAC_type_2 | Pseudo K-tuple reduced amino acids composition | 4 |
