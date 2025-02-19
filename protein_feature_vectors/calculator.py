@@ -25,6 +25,10 @@ class Calculator:
     # display the feature vectors
     print(calc.encodings)
 
+    # Get ids and values from the DataFrame
+    protein_ids = [x[0] for x in calc.encodings.iterrows()]
+    values = [x[1].tolist() for x in calc.encodings.iterrows()]
+
     # save feature vectors
     calc.to_csv("AAC.csv", index=False, header=False)
     """
@@ -191,12 +195,12 @@ class Calculator:
         standardized = list()
         for fasta in self.fasta_list:
             seqstr = fasta[1].upper()
-            result = self.check_for_nonstandard(seqstr)
-            if len(result) == 0:
+            invalid = self.check_for_nonstandard(seqstr)
+            if len(invalid) == 0:
                 standardized.append([fasta[0], seqstr])
             else:
                 if self.verbose:
-                    print(f"Skipping {fasta[0]} non-standard aa: {result}")
+                    print(f"Skipping {fasta[0]} non-standard aa: {invalid}")
         self.fasta_list = standardized
 
     def check_for_nonstandard(self, seqstr):
