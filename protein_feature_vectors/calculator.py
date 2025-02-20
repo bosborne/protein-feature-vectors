@@ -36,7 +36,7 @@ class Calculator:
     def __init__(self, verbose=False):
         self.verbose = verbose
         self.fasta_list = None
-        self.vector_length = None
+        self.vector_length = dict()
         self.datadir = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "data"
         )
