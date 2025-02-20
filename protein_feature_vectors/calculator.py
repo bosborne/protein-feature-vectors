@@ -290,7 +290,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     """
     def _EAAC(self):
@@ -345,7 +344,7 @@ class Calculator:
                 return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
+
     """
 
     def _CKSAAP(self, type=None):
@@ -406,7 +405,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _DPC(self, normalized=True):
         try:
@@ -445,7 +443,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _DDE(self):
         try:
@@ -517,7 +514,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _TPC(self, type=None):
         AA = "ACDEFGHIKLMNPQRSTVWY"
@@ -609,7 +605,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def generateGroupPairs(self, groupKey):
         gPair = {}
@@ -687,7 +682,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _GDPC(self, normalized=True):
         try:
@@ -743,7 +737,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _GTPC(self, normalized=True):
         try:
@@ -812,7 +805,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     """
     def _AAIndex(self):
@@ -877,7 +869,7 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
+
     """
 
     def _NMBroto(self):
@@ -953,7 +945,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _Moran(self):
         try:
@@ -1053,7 +1044,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _Geary(self):
         try:
@@ -1163,7 +1153,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def generatePropertyPairs(self, myPropertyName):
         pairs = []
@@ -1253,7 +1242,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _CC(self):
         try:
@@ -1350,7 +1338,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _ACC(self):
         try:
@@ -1486,7 +1473,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def Count(self, seq1, seq2):
         sum = 0
@@ -1581,7 +1567,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _CTDT(self):
         try:
@@ -1690,7 +1675,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def Count1(self, aaSet, sequence):
         number = 0
@@ -1809,7 +1793,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def CalculateKSCTriad(self, sequence, gap, features, AADict):
         res = []
@@ -1932,7 +1915,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _SOCNumber(self):
         try:
@@ -2019,7 +2001,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _QSOrder(self):
         nlag = self.__default_para["nlag"]
@@ -2209,7 +2190,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _APAAC(self):
         try:
@@ -2285,7 +2265,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _ASDC(self):
         try:
@@ -2322,7 +2301,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _DistancePair(self):
         try:
@@ -2481,7 +2459,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def gapModel(self, fastas, myDict, gDict, gNames, ktuple, glValue, ttype):
         encodings = []
@@ -2909,7 +2886,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_2(self):
         try:
@@ -3000,7 +2976,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_3A(self):
         try:
@@ -3241,7 +3216,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_3B(self):
         try:
@@ -3482,7 +3456,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_4(self):
         try:
@@ -3581,7 +3554,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_5(self):
         try:
@@ -3681,7 +3653,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_6A(self):
         try:
@@ -3755,7 +3726,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_6B(self):
         try:
@@ -3806,7 +3776,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_6C(self):
         try:
@@ -3853,7 +3822,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_7(self):
         try:
@@ -4098,7 +4066,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_8(self):
         try:
@@ -4341,7 +4308,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_9(self):
         try:
@@ -4582,7 +4548,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_10(self):
         try:
@@ -4823,7 +4788,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_11(self):
         try:
@@ -5064,7 +5028,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_12(self):
         try:
@@ -5284,7 +5247,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_13(self):
         try:
@@ -5390,7 +5352,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_14(self):
         try:
@@ -5635,7 +5596,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_15(self):
         try:
@@ -5820,7 +5780,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def _PseKRAAC_type_16(self):
         try:
@@ -6005,7 +5964,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def Sim(self, a, b):
         blosum62 = [
@@ -6532,7 +6490,6 @@ class Calculator:
             self.encodings.to_csv(file, index=index, header=header)
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
         return True
 
     def to_tsv(self, file="encode.tsv", index=False, header=False):
@@ -6540,7 +6497,6 @@ class Calculator:
             self.encodings.to_csv(file, sep="\t", index=index, header=header)
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
         return True
 
     def to_svm(self, file="encode.svm"):
@@ -6554,7 +6510,6 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
 
     def to_arff(self, file="encode.arff"):
         with open(file, "w") as f:
@@ -6688,5 +6643,5 @@ class Calculator:
             return True
         except Exception as e:
             sys.exit(f"Error: {e}")
-            return False
+
 """
