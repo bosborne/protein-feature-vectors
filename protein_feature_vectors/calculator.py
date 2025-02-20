@@ -13,23 +13,23 @@ class Calculator:
     """
     from protein_feature_vectors import Calculator
 
-    # create a instance
+    # Create a instance
     calc = Calculator()
 
-    # display available methods
+    # Display available methods
     calc.display_feature_types()
 
-    # calculate feature vectors
+    # Calculate feature vectors
     calc.get_feature_vectors("AAC", file="./data_examples/multi.fa")
 
-    # display the feature vectors
+    # Display the feature vectors
     print(calc.encodings)
 
     # Get ids and values from the DataFrame
     protein_ids = [x[0] for x in calc.encodings.iterrows()]
     values = [x[1].tolist() for x in calc.encodings.iterrows()]
 
-    # save feature vectors
+    # Save feature vectors
     calc.to_csv("AAC.csv", index=False, header=False)
     """
 
@@ -190,16 +190,16 @@ class Calculator:
         """validate
         Remove sequences with invalid characters and convert to uppercase
         """
-        standardized = list()
+        validated = list()
         for fasta in self.fasta_list:
             seqstr = fasta[1].upper()
             invalid = self.check_for_nonstandard(seqstr)
             if len(invalid) == 0:
-                standardized.append([fasta[0], seqstr])
+                validated.append([fasta[0], seqstr])
             else:
                 if self.verbose:
                     print(f"Skipping {fasta[0]} non-standard aa: {invalid}")
-        self.fasta_list = standardized
+        self.fasta_list = validated
 
     def check_for_nonstandard(self, seqstr):
         non_standard = set("BJOUXZ")
@@ -289,7 +289,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     """
@@ -344,7 +344,7 @@ class Calculator:
                 )
                 return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
     """
 
@@ -405,7 +405,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _DPC(self, normalized=True):
@@ -444,7 +444,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _DDE(self):
@@ -516,7 +516,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _TPC(self, type=None):
@@ -555,6 +555,9 @@ class Calculator:
                     if type == 1:
                         tmpCode = [i / sum(tmpCode) for i in tmpCode]
                     elif type == 3:
+                        """
+                        Type 3 is count of trimer per 1000 aa
+                        """
                         tmpCode = [
                             round((i * (1000 / len(sequence))), 1)
                             for i in tmpCode
@@ -605,7 +608,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def generateGroupPairs(self, groupKey):
@@ -683,7 +686,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _GDPC(self, normalized=True):
@@ -739,7 +742,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _GTPC(self, normalized=True):
@@ -808,7 +811,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     """
@@ -873,7 +876,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
     """
 
@@ -949,7 +952,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _Moran(self):
@@ -1049,7 +1052,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _Geary(self):
@@ -1159,7 +1162,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def generatePropertyPairs(self, myPropertyName):
@@ -1179,7 +1182,7 @@ class Calculator:
                 with open(data_file, "rb") as handle:
                     property_dict = pickle.load(handle)
             except Exception as e:
-                self.error_msg = (
+                sys.exit(
                     f"Could not find the physicochemical properties file: {e}"
                 )
                 return False
@@ -1249,7 +1252,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _CC(self):
@@ -1264,7 +1267,7 @@ class Calculator:
                 with open(data_file, "rb") as handle:
                     property_dict = pickle.load(handle)
             except Exception as e:
-                self.error_msg = (
+                sys.exit(
                     f"Could not find the physicochemical properties file: {e}"
                 )
                 return False
@@ -1346,7 +1349,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _ACC(self):
@@ -1361,7 +1364,7 @@ class Calculator:
                 with open(data_file, "rb") as handle:
                     property_dict = pickle.load(handle)
             except Exception as e:
-                self.error_msg = (
+                sys.exit(
                     f"Could not find the physicochemical properties file: {e}"
                 )
                 return False
@@ -1482,7 +1485,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def Count(self, seq1, seq2):
@@ -1577,7 +1580,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _CTDT(self):
@@ -1686,7 +1689,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def Count1(self, aaSet, sequence):
@@ -1805,7 +1808,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def CalculateKSCTriad(self, sequence, gap, features, AADict):
@@ -1928,7 +1931,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _SOCNumber(self):
@@ -2015,7 +2018,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _QSOrder(self):
@@ -2205,7 +2208,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _APAAC(self):
@@ -2281,7 +2284,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _ASDC(self):
@@ -2318,7 +2321,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _DistancePair(self):
@@ -2477,7 +2480,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def gapModel(self, fastas, myDict, gDict, gNames, ktuple, glValue, ttype):
@@ -2905,7 +2908,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_2(self):
@@ -2996,7 +2999,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_3A(self):
@@ -3237,7 +3240,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_3B(self):
@@ -3478,7 +3481,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_4(self):
@@ -3577,7 +3580,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_5(self):
@@ -3677,7 +3680,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_6A(self):
@@ -3751,7 +3754,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_6B(self):
@@ -3802,7 +3805,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_6C(self):
@@ -3849,7 +3852,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_7(self):
@@ -4094,7 +4097,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_8(self):
@@ -4305,11 +4308,9 @@ class Calculator:
                 if subtype == "g-gap"
                 else self.__default_para["lambdaValue"]
             )
-
             if raactype not in AAGroup:
                 self.error_msg = "PseKRAAC descriptor value error."
                 return False
-
             # index each amino acids to their group
             myDict = {}
             for i in range(len(AAGroup[raactype])):
@@ -4339,7 +4340,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_9(self):
@@ -4580,7 +4581,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_10(self):
@@ -4821,7 +4822,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_11(self):
@@ -5062,7 +5063,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_12(self):
@@ -5282,7 +5283,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_13(self):
@@ -5388,7 +5389,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_14(self):
@@ -5633,7 +5634,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_15(self):
@@ -5818,7 +5819,7 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def _PseKRAAC_type_16(self):
@@ -6003,10 +6004,8 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
-
-    """ KNN descriptor """
 
     def Sim(self, a, b):
         blosum62 = [
@@ -6532,7 +6531,7 @@ class Calculator:
         try:
             self.encodings.to_csv(file, index=index, header=header)
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
         return True
 
@@ -6540,7 +6539,7 @@ class Calculator:
         try:
             self.encodings.to_csv(file, sep="\t", index=index, header=header)
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
         return True
 
@@ -6554,7 +6553,7 @@ class Calculator:
                     f.write("\n")
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 
     def to_arff(self, file="encode.arff"):
@@ -6688,6 +6687,6 @@ class Calculator:
             )
             return True
         except Exception as e:
-            self.error_msg = str(e)
+            sys.exit(f"Error: {e}")
             return False
 """
