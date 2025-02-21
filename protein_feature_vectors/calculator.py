@@ -25,7 +25,7 @@ class Calculator:
     # Display the feature vectors
     print(calc.encodings)
 
-    # Get ids and values from the DataFrame
+    # Get ids and values from the *encodings* DataFrame
     protein_ids = [x[0] for x in calc.encodings.iterrows()]
     values = [x[1].tolist() for x in calc.encodings.iterrows()]
 
@@ -35,7 +35,7 @@ class Calculator:
 
     def __init__(self, verbose=False):
         self.verbose = verbose
-        self.fasta_list = None
+        self.fasta_list = list()
         self.vector_length = dict()
         self.datadir = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "data"
@@ -163,7 +163,7 @@ class Calculator:
             self.fasta_list = [
                 [id, sequence] for id, sequence in pdict.items()
             ]
-        elif self.fasta_list is None:
+        elif len(self.fasta_list) == 0:
             sys.exit("No sequence supplied")
         # Remove sequences with invalid chars
         self.validate()
