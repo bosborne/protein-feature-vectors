@@ -35,7 +35,7 @@ class Calculator:
 
     def __init__(self, verbose=False):
         self.verbose = verbose
-        self.fasta_list = list()
+        self.seq_list = list()
         self.vector_length = dict()
         self.datadir = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "data"
@@ -116,12 +116,12 @@ class Calculator:
         ['H6SH45_9HIV1', 'MFFRENLAFQQREARKF...WTYQIYQEIELELAENREI']]
         """
         fasta_sequences = []
-        if not os.path.exists(self.file):
-            sys.exit(f"Error: cannot find file '{self.file}'")
-        for record in fastapy.parse(self.file):
+        if not os.path.exists(self.fasta_file):
+            sys.exit(f"Error: cannot find file '{self.fasta_file}'")
+        for record in fastapy.parse(self.fasta_file):
             fasta_sequences.append([record.id, str(record.seq).upper()])
 
-        self.fasta_list = fasta_sequences
+        self.seq_list = fasta_sequences
 
     def import_parameters(self, file):
         """import_parameters
@@ -157,18 +157,16 @@ class Calculator:
             sys.exit(f"No such algorithm: {descriptor}")
 
         if file is not None:
-            self.file = file
+            self.fasta_file = file
             self.read_fasta()
         elif pdict is not None and isinstance(pdict, dict):
-            self.fasta_list = [
-                [id, sequence] for id, sequence in pdict.items()
-            ]
-        elif len(self.fasta_list) == 0:
+            self.seq_list = [[id, sequence] for id, sequence in pdict.items()]
+        elif len(self.seq_list) == 0:
             sys.exit("No sequence supplied")
         # Remove sequences with invalid chars
         self.validate()
 
-        self.sequence_number = len(self.fasta_list)
+        self.sequence_number = len(self.seq_list)
         self.encodings = None
         # Copy parameters
         if descriptor in self.__default_para_dict:
@@ -191,7 +189,7 @@ class Calculator:
         Remove sequences with invalid characters and convert to uppercase
         """
         validated = list()
-        for fasta in self.fasta_list:
+        for fasta in self.seq_list:
             seqstr = fasta[1].upper()
             invalid = self.check_for_nonstandard(seqstr)
             if len(invalid) == 0:
@@ -199,7 +197,7 @@ class Calculator:
             else:
                 if self.verbose:
                     print(f"Skipping {fasta[0]} non-standard aa: {invalid}")
-        self.fasta_list = validated
+        self.seq_list = validated
 
     def check_for_nonstandard(self, seqstr):
         non_standard = set("BJOUXZ")
@@ -272,7 +270,7 @@ class Calculator:
             for i in AA:
                 header.append("AAC_{0}".format(i))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 count = Counter(sequence)
                 for key in count:
@@ -305,14 +303,14 @@ class Calculator:
                 header = ["SampleName"]
                 for w in range(
                     1,
-                    len(self.fasta_list[0][1])
+                    len(self.seq_list[0][1])
                     - self.__default_para["sliding_window"]
                     + 2,
                 ):
                     for aa in AA:
                         header.append("EAAC_SW." + str(w) + "." + aa)
                 encodings.append(header)
-                for i in self.fasta_list:
+                for i in self.seq_list:
                     name, sequence = i[0], i[1]
                     code = [name]
                     for j in range(len(sequence)):
@@ -361,7 +359,7 @@ class Calculator:
                 for aa in aaPairs:
                     header.append("CKSAAP_" + aa + ".gap" + str(g))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 for g in range(gap + 1):
@@ -416,7 +414,7 @@ class Calculator:
             AADict = {}
             for i in range(len(AA)):
                 AADict[AA[i]] = i
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 tmpCode = [0] * 400
@@ -482,7 +480,7 @@ class Calculator:
             AADict = {}
             for i in range(len(AA)):
                 AADict[AA[i]] = i
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 tmpCode = [0] * 400
@@ -526,7 +524,7 @@ class Calculator:
         AADict = {}
         for i in range(len(AA)):
             AADict[AA[i]] = i
-        for i in self.fasta_list:
+        for i in self.seq_list:
             try:
                 name, sequence = i[0], i[1]
                 if len(sequence) < 3:
@@ -585,7 +583,7 @@ class Calculator:
             for key in groupKey:
                 header.append("GAAC_{0}".format(key))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 count = Counter(sequence)
@@ -639,7 +637,7 @@ class Calculator:
                 for p in gPairIndex:
                     header.append("CKSAAGP_" + p + ".gap" + str(g))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 for g in range(gap + 1):
@@ -701,7 +699,7 @@ class Calculator:
             encodings = []
             header = ["SampleName"] + ["GDPC_{0}".format(i) for i in dipeptide]
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 myDict = {}
@@ -761,7 +759,7 @@ class Calculator:
             encodings = []
             header = ["SampleName"] + ["GTPC_{0}".format(i) for i in triple]
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 myDict = {}
@@ -845,11 +843,11 @@ class Calculator:
                     AAindex = tmpIndex
             encodings = []
             header = ["SampleName"]
-            for pos in range(1, len(self.fasta_list[0][1]) + 1):
+            for pos in range(1, len(self.seq_list[0][1]) + 1):
                 for idName in AAindexName:
                     header.append("AAindex_" + "p." + str(pos) + "." + idName)
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 for aa in sequence:
@@ -909,7 +907,7 @@ class Calculator:
                 for n in range(1, nlag + 1):
                     header.append("NMBroto_" + p + ".lag" + str(n))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 if len(sequence) <= nlag + 1:
                     if self.verbose:
@@ -983,7 +981,7 @@ class Calculator:
                 for n in range(1, nlag + 1):
                     header.append("Moran_" + p + ".lag" + str(n))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 if len(sequence) <= nlag + 1:
                     if self.verbose:
@@ -1085,7 +1083,7 @@ class Calculator:
                 for n in range(1, nlag + 1):
                     header.append("Geary_" + p + ".lag" + str(n))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 N = len(sequence)
@@ -1190,7 +1188,7 @@ class Calculator:
                 for i in range(nlag):
                     header.append("AC_%s.lag%s" % (p_name, i + 1))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 if len(sequence) < nlag + 1:
                     if self.verbose:
@@ -1277,7 +1275,7 @@ class Calculator:
                 for lag in range(1, nlag + 1)
             ]
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 if len(sequence) < nlag + 1:
                     if self.verbose:
@@ -1376,7 +1374,7 @@ class Calculator:
                 for lag in range(1, nlag + 1)
             ]
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 if len(sequence) < nlag + 1:
                     if self.verbose:
@@ -1549,7 +1547,7 @@ class Calculator:
                 for g in range(1, len(groups) + 1):
                     header.append("CTDC_" + p + ".G" + str(g))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 for p in property:
@@ -1637,7 +1635,7 @@ class Calculator:
                 for tr in ("Tr1221", "Tr1331", "Tr2332"):
                     header.append("CTDT_" + p + "." + tr)
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 aaPair = [
@@ -1773,7 +1771,7 @@ class Calculator:
                     for d in ["0", "25", "50", "75", "100"]:
                         header.append("CTDD_" + p + "." + g + ".residue" + d)
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 for p in property:
@@ -1845,7 +1843,7 @@ class Calculator:
         for f in features:
             header.append("CTriad_{0}".format(f))
         encodings.append(header)
-        for i in self.fasta_list:
+        for i in self.seq_list:
             name, sequence = i[0], i[1]
             if len(sequence) < 30:
                 if self.verbose:
@@ -1893,7 +1891,7 @@ class Calculator:
                 for f in features:
                     header.append("KSCTriad_" + f + ".gap" + str(g))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 if len(sequence) < 2 * gap + 3:
@@ -1962,7 +1960,7 @@ class Calculator:
             for n in range(1, nlag + 1):
                 header.append("SOCNumber_gGrantham.lag" + str(n))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 for n in range(1, nlag + 1):
@@ -2053,7 +2051,7 @@ class Calculator:
             header.append("QSOrder_Grantham.Xd." + str(n))
         encodings.append(header)
         try:
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 if nlag > len(sequence) - 1:
                     print(
@@ -2150,7 +2148,7 @@ class Calculator:
             for n in range(1, lambdaValue + 1):
                 header.append("PAAC_Xc2.lambda" + str(n))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 if len(sequence) < lambdaValue + 1:
                     if self.verbose:
@@ -2225,7 +2223,7 @@ class Calculator:
                 for i in AAPropertyNames:
                     header.append("APAAC_Pc2." + i + "." + str(j))
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 if lambdaValue > len(sequence) - 1:
                     if self.verbose:
@@ -2277,7 +2275,7 @@ class Calculator:
             header = ["SampleName"]
             header += ["ASDC_" + aa1 + aa2 for aa1 in AA for aa2 in AA]
             encodings.append(header)
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
                 sum = 0
@@ -2425,7 +2423,7 @@ class Calculator:
                     for key in sorted(pair_dict):
                         header.append("DP_%s.distance%s" % (key, d))
             encodings.append(header)
-            for elem in self.fasta_list:
+            for elem in self.seq_list:
                 name, sequence = elem[0], elem[1]
                 if len(sequence) < distance + 1:
                     if self.verbose:
@@ -2845,7 +2843,7 @@ class Calculator:
                     "K",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -2936,7 +2934,7 @@ class Calculator:
                     "H",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -3176,7 +3174,7 @@ class Calculator:
                     "C",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -3416,7 +3414,7 @@ class Calculator:
                     "W",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -3514,7 +3512,7 @@ class Calculator:
                     "C",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -3613,7 +3611,7 @@ class Calculator:
                     "C",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -3682,7 +3680,7 @@ class Calculator:
                     "Y",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -3732,7 +3730,7 @@ class Calculator:
             AAGroup = {
                 5: ["AEHKQRST", "CFILMVWY", "DN", "G", "P"],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -3782,7 +3780,7 @@ class Calculator:
             AAGroup = {
                 5: ["AG", "C", "DEKNPQRST", "FILMVWY", "H"],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -4022,7 +4020,7 @@ class Calculator:
                     "N",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -4266,7 +4264,7 @@ class Calculator:
                     "Y",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -4508,7 +4506,7 @@ class Calculator:
                     "Y",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -4748,7 +4746,7 @@ class Calculator:
                     "K",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -4988,7 +4986,7 @@ class Calculator:
                     "K",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -5207,7 +5205,7 @@ class Calculator:
                     "E",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -5308,7 +5306,7 @@ class Calculator:
                     "P",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -5552,7 +5550,7 @@ class Calculator:
                     "Y",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -5736,7 +5734,7 @@ class Calculator:
                     "E",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -5920,7 +5918,7 @@ class Calculator:
                     "D",
                 ],
             }
-            fastas = self.fasta_list
+            fastas = self.seq_list
             subtype = self.__default_para["PseKRAAC_model"]
             raactype = self.__default_para["RAAC_clust"]
             ktuple = self.__default_para["k-tuple"]
@@ -6572,7 +6570,7 @@ class Calculator:
 
             training_data = []
             training_label = {}
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 if i[3] == "training":
                     training_data.append(i)
                     training_label[i[0]] = int(i[2])
@@ -6584,15 +6582,15 @@ class Calculator:
 
             # calculate pair distance
             distance_dict = {}
-            for i in range(len(self.fasta_list)):
+            for i in range(len(self.seq_list)):
                 name_seq1, sequence_1 = (
-                    self.fasta_list[i][0],
-                    self.fasta_list[i][1],
+                    self.seq_list[i][0],
+                    self.seq_list[i][1],
                 )
-                for j in range(i + 1, len(self.fasta_list)):
+                for j in range(i + 1, len(self.seq_list)):
                     name_seq2, sequence_2 = (
-                        self.fasta_list[j][0],
-                        self.fasta_list[j][1],
+                        self.seq_list[j][0],
+                        self.seq_list[j][1],
                     )
                 distance_dict[":".join(sorted([name_seq1, name_seq2]))] = (
                     self.CalculateDistance(sequence_1, sequence_2)
@@ -6605,7 +6603,7 @@ class Calculator:
                     header.append("Top" + str(k) + ".label" + str(label))
             encodings.append(header)
 
-            for i in self.fasta_list:
+            for i in self.seq_list:
                 name = i[0]
                 code = [name]
                 tmp_distance_list = []
