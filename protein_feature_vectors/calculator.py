@@ -356,7 +356,7 @@ class Calculator:
             gap = self.__default_para["kspace"]
             for g in range(gap + 1):
                 for aa in aaPairs:
-                    header.append("CKSAAP_" + aa + ".gap" + str(g))
+                    header.append(f"CKSAAP{type}_" + aa + ".gap" + str(g))
             encodings.append(header)
             for i in self.seq_list:
                 name, sequence = i[0], i[1]
@@ -516,7 +516,10 @@ class Calculator:
         AA = "ACDEFGHIKLMNPQRSTVWY"
         encodings = []
         triPeptides = [
-            "TPC_" + aa1 + aa2 + aa3 for aa1 in AA for aa2 in AA for aa3 in AA
+            f"TPC{type}_" + aa1 + aa2 + aa3
+            for aa1 in AA
+            for aa2 in AA
+            for aa3 in AA
         ]
         header = ["SampleName"] + triPeptides
         encodings.append(header)
