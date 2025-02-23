@@ -35,6 +35,7 @@ class Calculator:
 
     def __init__(self, verbose=False):
         self.verbose = verbose
+        self.AA = "ACDEFGHIKLMNPQRSTVWY"
         self.seq_list = list()
         self.vector_length = dict()
         self.datadir = os.path.join(
@@ -263,10 +264,9 @@ class Calculator:
 
     def _AAC(self):
         try:
-            AA = "ACDEFGHIKLMNPQRSTVWY"
             header = ["SampleName"]
             encodings = []
-            for i in AA:
+            for i in self.AA:
                 header.append("AAC_{0}".format(i))
             encodings.append(header)
             for i in self.seq_list:
@@ -275,7 +275,7 @@ class Calculator:
                 for key in count:
                     count[key] = count[key] / len(sequence)
                 code = [name]
-                for aa in AA:
+                for aa in self.AA:
                     code.append(count[aa])
                 encodings.append(code)
             encodings = np.array(encodings)
@@ -288,69 +288,12 @@ class Calculator:
         except Exception as e:
             sys.exit(f"Error: {e}")
 
-    """
-    def _EAAC(self):
-        try:
-            if not self.is_equal:
-                self.error_msg = (
-                    "EAAC descriptor need fasta sequence with equal length."
-                )
-                self.encodings = None
-            else:
-                AA = "ARNDCQEGHILKMFPSTWYV"
-                encodings = []
-                header = ["SampleName"]
-                for w in range(
-                    1,
-                    len(self.seq_list[0][1])
-                    - self.__default_para["sliding_window"]
-                    + 2,
-                ):
-                    for aa in AA:
-                        header.append("EAAC_SW." + str(w) + "." + aa)
-                encodings.append(header)
-                for i in self.seq_list:
-                    name, sequence = i[0], i[1]
-                    code = [name]
-                    for j in range(len(sequence)):
-                        if j < len(sequence) and j + self.__default_para[
-                            "sliding_window"
-                        ] <= len(sequence):
-                            count = Counter(
-                                sequence[
-                                    j : j
-                                    + self.__default_para["sliding_window"]
-                                ]
-                            )
-                            for key in count:
-                                count[key] = count[key] / len(
-                                    sequence[
-                                        j : j
-                                        + self.__default_para["sliding_window"]
-                                    ]
-                                )
-                            for aa in AA:
-                                code.append(count[aa])
-                    encodings.append(code)
-                encodings = np.array(encodings)
-                self.encodings = pd.DataFrame(
-                    encodings[1:, 1:].astype(float),
-                    columns=encodings[0, 1:],
-                    index=encodings[1:, 0],
-                )
-                return True
-        except Exception as e:
-            sys.exit(f"Error: {e}")
-
-    """
-
     def _CKSAAP(self, type=None):
         try:
-            AA = "ACDEFGHIKLMNPQRSTVWY"
             encodings = []
             aaPairs = []
-            for aa1 in AA:
-                for aa2 in AA:
+            for aa1 in self.AA:
+                for aa2 in self.AA:
                     aaPairs.append(aa1 + aa2)
             header = ["SampleName"]
             gap = self.__default_para["kspace"]
@@ -371,8 +314,8 @@ class Calculator:
                         if (
                             index1 < len(sequence)
                             and index2 < len(sequence)
-                            and sequence[index1] in AA
-                            and sequence[index2] in AA
+                            and sequence[index1] in self.AA
+                            and sequence[index2] in self.AA
                         ):
                             myDict[sequence[index1] + sequence[index2]] = (
                                 myDict[sequence[index1] + sequence[index2]] + 1
@@ -405,14 +348,15 @@ class Calculator:
 
     def _DPC(self, normalized=True):
         try:
-            AA = "ACDEFGHIKLMNPQRSTVWY"
             encodings = []
-            diPeptides = ["DPC_" + aa1 + aa2 for aa1 in AA for aa2 in AA]
+            diPeptides = [
+                "DPC_" + aa1 + aa2 for aa1 in self.AA for aa2 in self.AA
+            ]
             header = ["SampleName"] + diPeptides
             encodings.append(header)
             AADict = {}
-            for i in range(len(AA)):
-                AADict[AA[i]] = i
+            for i in range(len(self.AA)):
+                AADict[self.AA[i]] = i
             for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
@@ -443,7 +387,6 @@ class Calculator:
 
     def _DDE(self):
         try:
-            AA = "ACDEFGHIKLMNPQRSTVWY"
             myCodons = {
                 "A": 4,
                 "C": 2,
@@ -467,7 +410,7 @@ class Calculator:
                 "Y": 2,
             }
             encodings = []
-            diPeptides = [aa1 + aa2 for aa1 in AA for aa2 in AA]
+            diPeptides = [aa1 + aa2 for aa1 in self.AA for aa2 in self.AA]
             header = ["SampleName"] + ["DDE_{0}".format(i) for i in diPeptides]
             encodings.append(header)
             myTM = []
@@ -477,8 +420,8 @@ class Calculator:
                 )
 
             AADict = {}
-            for i in range(len(AA)):
-                AADict[AA[i]] = i
+            for i in range(len(self.AA)):
+                AADict[self.AA[i]] = i
             for i in self.seq_list:
                 name, sequence = i[0], i[1]
                 code = [name]
@@ -513,19 +456,18 @@ class Calculator:
             sys.exit(f"Error: {e}")
 
     def _TPC(self, type=None):
-        AA = "ACDEFGHIKLMNPQRSTVWY"
         encodings = []
         triPeptides = [
             f"TPC{type}_" + aa1 + aa2 + aa3
-            for aa1 in AA
-            for aa2 in AA
-            for aa3 in AA
+            for aa1 in self.AA
+            for aa2 in self.AA
+            for aa3 in self.AA
         ]
         header = ["SampleName"] + triPeptides
         encodings.append(header)
         AADict = {}
-        for i in range(len(AA)):
-            AADict[AA[i]] = i
+        for i in range(len(self.AA)):
+            AADict[self.AA[i]] = i
         for i in self.seq_list:
             try:
                 name, sequence = i[0], i[1]
@@ -623,7 +565,6 @@ class Calculator:
                 "negativecharger": "DE",
                 "uncharger": "STCPNQ",
             }
-            AA = "ARNDCQEGHILKMFPSTWYV"
             groupKey = group.keys()
             index = {}
             for key in groupKey:
@@ -649,8 +590,8 @@ class Calculator:
                         p2 = p1 + g + 1
                         if (
                             p2 < len(sequence)
-                            and sequence[p1] in AA
-                            and sequence[p2] in AA
+                            and sequence[p1] in self.AA
+                            and sequence[p2] in self.AA
                         ):
                             gPair[
                                 index[sequence[p1]] + "." + index[sequence[p2]]
@@ -806,77 +747,10 @@ class Calculator:
         except Exception as e:
             sys.exit(f"Error: {e}")
 
-    """
-    def _AAIndex(self):
-        try:
-            props = self.__default_para["aaindex"].split(";")
-            self.encoding_array = np.array([])
-            if not self.is_equal:
-                self.error_msg = (
-                    "AAIndex descriptor need fasta sequence with equal length."
-                )
-                return False
-            AA = "ARNDCQEGHILKMFPSTWYV"
-            fileAAindex = os.path.join(self.datadir, "AAindex.txt")
-            with open(fileAAindex) as f:
-                records = f.readlines()[1:]
-            AAindex = []
-            AAindexName = []
-            for i in records:
-                AAindex.append(
-                    i.rstrip().split()[1:] if i.rstrip() != "" else None
-                )
-                AAindexName.append(
-                    i.rstrip().split()[0] if i.rstrip() != "" else None
-                )
-            index = {}
-            for i in range(len(AA)):
-                index[AA[i]] = i
-            #  use the user inputed properties
-            if props:
-                tmpIndexNames = []
-                tmpIndex = []
-                for p in props:
-                    if AAindexName.index(p) != -1:
-                        tmpIndexNames.append(p)
-                        tmpIndex.append(AAindex[AAindexName.index(p)])
-                if len(tmpIndexNames) != 0:
-                    AAindexName = tmpIndexNames
-                    AAindex = tmpIndex
-            encodings = []
-            header = ["SampleName"]
-            for pos in range(1, len(self.seq_list[0][1]) + 1):
-                for idName in AAindexName:
-                    header.append("AAindex_" + "p." + str(pos) + "." + idName)
-            encodings.append(header)
-            for i in self.seq_list:
-                name, sequence = i[0], i[1]
-                code = [name]
-                for aa in sequence:
-                    if aa == "-":
-                        for j in AAindex:
-                            code.append(0)
-                        continue
-                    for j in AAindex:
-                        code.append(j[index[aa]])
-                encodings.append(code)
-            encodings = np.array(encodings)
-            self.encodings = pd.DataFrame(
-                encodings[1:, 1:].astype(float),
-                columns=encodings[0, 1:],
-                index=encodings[1:, 0],
-            )
-            return True
-        except Exception as e:
-            sys.exit(f"Error: {e}")
-
-    """
-
     def _NMBroto(self):
         try:
             props = self.__default_para["aaindex"].split(";")
             nlag = self.__default_para["nlag"]
-            AA = "ARNDCQEGHILKMFPSTWYV"
             fileAAidx = os.path.join(self.datadir, "AAidx.txt")
             with open(fileAAidx) as f:
                 records = f.readlines()[1:]
@@ -901,8 +775,8 @@ class Calculator:
                 for j in range(len(AAidx[i])):
                     AAidx[i][j] = (AAidx[i][j] - pmean[i]) / pstd[i]
             index = {}
-            for i in range(len(AA)):
-                index[AA[i]] = i
+            for i in range(len(self.AA)):
+                index[self.AA[i]] = i
             encodings = []
             header = ["SampleName"]
             for p in props:
@@ -950,7 +824,6 @@ class Calculator:
         try:
             props = self.__default_para["aaindex"].split(";")
             nlag = self.__default_para["nlag"]
-            AA = "ARNDCQEGHILKMFPSTWYV"
             fileAAidx = os.path.join(self.datadir, "AAidx.txt")
             with open(fileAAidx) as f:
                 records = f.readlines()[1:]
@@ -975,8 +848,8 @@ class Calculator:
                 for j in range(len(AAidx[i])):
                     AAidx[i][j] = (AAidx[i][j] - propMean[i]) / propStd[i]
             index = {}
-            for i in range(len(AA)):
-                index[AA[i]] = i
+            for i in range(len(self.AA)):
+                index[self.AA[i]] = i
             encodings = []
             header = ["SampleName"]
             for p in props:
@@ -1053,7 +926,6 @@ class Calculator:
                 self.datadir,
                 "AAidx.txt",
             )
-            AA = "ARNDCQEGHILKMFPSTWYV"
             with open(fileAAidx) as f:
                 records = f.readlines()[1:]
             myDict = {}
@@ -1077,8 +949,8 @@ class Calculator:
                 for j in range(len(AAidx[i])):
                     AAidx[i][j] = (AAidx[i][j] - propMean[i]) / propStd[i]
             index = {}
-            for i in range(len(AA)):
-                index[AA[i]] = i
+            for i in range(len(self.AA)):
+                index[self.AA[i]] = i
             encodings = []
             header = ["SampleName"]
             for p in props:
@@ -1180,10 +1052,9 @@ class Calculator:
                 pmean = np.average(tmp)
                 pstd = np.std(tmp)
                 property_dict[p_name] = [(elem - pmean) / pstd for elem in tmp]
-            AA = "ARNDCQEGHILKMFPSTWYV"
             AA_order_dict = {}
-            for i in range(len(AA)):
-                AA_order_dict[AA[i]] = i
+            for i in range(len(self.AA)):
+                AA_order_dict[self.AA[i]] = i
             encodings = []
             header = ["SampleName"]
             for p_name in property_name:
@@ -1264,10 +1135,9 @@ class Calculator:
                 pmean = np.average(tmp)
                 pstd = np.std(tmp)
                 property_dict[p_name] = [(elem - pmean) / pstd for elem in tmp]
-            AA = "ARNDCQEGHILKMFPSTWYV"
             AA_order_dict = {}
-            for i in range(len(AA)):
-                AA_order_dict[AA[i]] = i
+            for i in range(len(self.AA)):
+                AA_order_dict[self.AA[i]] = i
             property_pairs = self.generatePropertyPairs(property_name)
             encodings = []
             header = ["SampleName"]
@@ -1360,10 +1230,9 @@ class Calculator:
                 pmean = np.average(tmp)
                 pstd = np.std(tmp)
                 property_dict[p_name] = [(elem - pmean) / pstd for elem in tmp]
-            AA = "ARNDCQEGHILKMFPSTWYV"
             AA_order_dict = {}
-            for i in range(len(AA)):
-                AA_order_dict[AA[i]] = i
+            for i in range(len(self.AA)):
+                AA_order_dict[self.AA[i]] = i
             property_pairs = self.generatePropertyPairs(property_name)
             encodings = []
             header = ["SampleName"]
@@ -1921,14 +1790,12 @@ class Calculator:
             nlag = self.__default_para["nlag"]
             dataFile = os.path.join(self.datadir, "Schneider-Wrede.txt")
             dataFile1 = os.path.join(self.datadir, "Grantham.txt")
-            AA = "ACDEFGHIKLMNPQRSTVWY"
-            AA1 = "ARNDCQEGHILKMFPSTWYV"
             DictAA = {}
-            for i in range(len(AA)):
-                DictAA[AA[i]] = i
+            for i in range(len(self.AA)):
+                DictAA[self.AA[i]] = i
             DictAA1 = {}
-            for i in range(len(AA1)):
-                DictAA1[AA1[i]] = i
+            for i in range(len(self.AA)):
+                DictAA1[self.AA[i]] = i
             with open(dataFile) as f:
                 records = f.readlines()[1:]
             AADistance = []
@@ -2007,14 +1874,12 @@ class Calculator:
         w = self.__default_para["weight"]
         dataFile0 = os.path.join(self.datadir, "Schneider-Wrede.txt")
         dataFile1 = os.path.join(self.datadir, "Grantham.txt")
-        AA = "ACDEFGHIKLMNPQRSTVWY"
-        AA1 = "ARNDCQEGHILKMFPSTWYV"
         DictAA = {}
-        for i in range(len(AA)):
-            DictAA[AA[i]] = i
+        for i in range(len(self.AA)):
+            DictAA[self.AA[i]] = i
         DictAA1 = {}
-        for i in range(len(AA1)):
-            DictAA1[AA1[i]] = i
+        for i in range(len(self.AA)):
+            DictAA1[self.AA[i]] = i
         with open(dataFile0) as f:
             records = f.readlines()[1:]
         AADistance = []
@@ -2043,9 +1908,9 @@ class Calculator:
         ).reshape((20, 20))
         encodings = []
         header = ["SampleName"]
-        for aa in AA1:
+        for aa in self.AA:
             header.append("QSOrder_Schneider.Xr." + aa)
-        for aa in AA1:
+        for aa in self.AA:
             header.append("QSOrder_Grantham.Xr." + aa)
         for n in range(1, nlag + 1):
             header.append("QSOrder_Schneider.Xd." + str(n))
@@ -2087,11 +1952,11 @@ class Calculator:
                         )
                     )
                 myDict = {}
-                for aa in AA1:
+                for aa in self.AA:
                     myDict[aa] = sequence.count(aa)
-                for aa in AA1:
+                for aa in self.AA:
                     code.append(myDict[aa] / (1 + w * sum(arraySW)))
-                for aa in AA1:
+                for aa in self.AA:
                     code.append(myDict[aa] / (1 + w * sum(arrayGM)))
                 for num in arraySW:
                     code.append((w * num) / (1 + w * sum(arraySW)))
@@ -2268,14 +2133,15 @@ class Calculator:
 
     def _ASDC(self):
         try:
-            AA = "ACDEFGHIKLMNPQRSTVWY"
             encodings = []
             aaPairs = []
-            for aa1 in AA:
-                for aa2 in AA:
+            for aa1 in self.AA:
+                for aa2 in self.AA:
                     aaPairs.append(aa1 + aa2)
             header = ["SampleName"]
-            header += ["ASDC_" + aa1 + aa2 for aa1 in AA for aa2 in AA]
+            header += [
+                "ASDC_" + aa1 + aa2 for aa1 in self.AA for aa2 in self.AA
+            ]
             encodings.append(header)
             for i in self.seq_list:
                 name, sequence = i[0], i[1]
@@ -2286,7 +2152,7 @@ class Calculator:
                     pair_dict[pair] = 0
                 for j in range(len(sequence)):
                     for k in range(j + 1, len(sequence)):
-                        if sequence[j] in AA and sequence[k] in AA:
+                        if sequence[j] in self.AA and sequence[k] in self.AA:
                             pair_dict[sequence[j] + sequence[k]] += 1
                             sum += 1
                 for pair in aaPairs:
@@ -5965,526 +5831,6 @@ class Calculator:
         except Exception as e:
             sys.exit(f"Error: {e}")
 
-    def Sim(self, a, b):
-        blosum62 = [
-            [
-                4,
-                -1,
-                -2,
-                -2,
-                0,
-                -1,
-                -1,
-                0,
-                -2,
-                -1,
-                -1,
-                -1,
-                -1,
-                -2,
-                -1,
-                1,
-                0,
-                -3,
-                -2,
-                0,
-                0,
-            ],  # A
-            [
-                -1,
-                5,
-                0,
-                -2,
-                -3,
-                1,
-                0,
-                -2,
-                0,
-                -3,
-                -2,
-                2,
-                -1,
-                -3,
-                -2,
-                -1,
-                -1,
-                -3,
-                -2,
-                -3,
-                0,
-            ],  # R
-            [
-                -2,
-                0,
-                6,
-                1,
-                -3,
-                0,
-                0,
-                0,
-                1,
-                -3,
-                -3,
-                0,
-                -2,
-                -3,
-                -2,
-                1,
-                0,
-                -4,
-                -2,
-                -3,
-                0,
-            ],  # N
-            [
-                -2,
-                -2,
-                1,
-                6,
-                -3,
-                0,
-                2,
-                -1,
-                -1,
-                -3,
-                -4,
-                -1,
-                -3,
-                -3,
-                -1,
-                0,
-                -1,
-                -4,
-                -3,
-                -3,
-                0,
-            ],  # D
-            [
-                0,
-                -3,
-                -3,
-                -3,
-                9,
-                -3,
-                -4,
-                -3,
-                -3,
-                -1,
-                -1,
-                -3,
-                -1,
-                -2,
-                -3,
-                -1,
-                -1,
-                -2,
-                -2,
-                -1,
-                0,
-            ],  # C
-            [
-                -1,
-                1,
-                0,
-                0,
-                -3,
-                5,
-                2,
-                -2,
-                0,
-                -3,
-                -2,
-                1,
-                0,
-                -3,
-                -1,
-                0,
-                -1,
-                -2,
-                -1,
-                -2,
-                0,
-            ],  # Q
-            [
-                -1,
-                0,
-                0,
-                2,
-                -4,
-                2,
-                5,
-                -2,
-                0,
-                -3,
-                -3,
-                1,
-                -2,
-                -3,
-                -1,
-                0,
-                -1,
-                -3,
-                -2,
-                -2,
-                0,
-            ],  # E
-            [
-                0,
-                -2,
-                0,
-                -1,
-                -3,
-                -2,
-                -2,
-                6,
-                -2,
-                -4,
-                -4,
-                -2,
-                -3,
-                -3,
-                -2,
-                0,
-                -2,
-                -2,
-                -3,
-                -3,
-                0,
-            ],  # G
-            [
-                -2,
-                0,
-                1,
-                -1,
-                -3,
-                0,
-                0,
-                -2,
-                8,
-                -3,
-                -3,
-                -1,
-                -2,
-                -1,
-                -2,
-                -1,
-                -2,
-                -2,
-                2,
-                -3,
-                0,
-            ],  # H
-            [
-                -1,
-                -3,
-                -3,
-                -3,
-                -1,
-                -3,
-                -3,
-                -4,
-                -3,
-                4,
-                2,
-                -3,
-                1,
-                0,
-                -3,
-                -2,
-                -1,
-                -3,
-                -1,
-                3,
-                0,
-            ],  # I
-            [
-                -1,
-                -2,
-                -3,
-                -4,
-                -1,
-                -2,
-                -3,
-                -4,
-                -3,
-                2,
-                4,
-                -2,
-                2,
-                0,
-                -3,
-                -2,
-                -1,
-                -2,
-                -1,
-                1,
-                0,
-            ],  # L
-            [
-                -1,
-                2,
-                0,
-                -1,
-                -3,
-                1,
-                1,
-                -2,
-                -1,
-                -3,
-                -2,
-                5,
-                -1,
-                -3,
-                -1,
-                0,
-                -1,
-                -3,
-                -2,
-                -2,
-                0,
-            ],  # K
-            [
-                -1,
-                -1,
-                -2,
-                -3,
-                -1,
-                0,
-                -2,
-                -3,
-                -2,
-                1,
-                2,
-                -1,
-                5,
-                0,
-                -2,
-                -1,
-                -1,
-                -1,
-                -1,
-                1,
-                0,
-            ],  # M
-            [
-                -2,
-                -3,
-                -3,
-                -3,
-                -2,
-                -3,
-                -3,
-                -3,
-                -1,
-                0,
-                0,
-                -3,
-                0,
-                6,
-                -4,
-                -2,
-                -2,
-                1,
-                3,
-                -1,
-                0,
-            ],  # F
-            [
-                -1,
-                -2,
-                -2,
-                -1,
-                -3,
-                -1,
-                -1,
-                -2,
-                -2,
-                -3,
-                -3,
-                -1,
-                -2,
-                -4,
-                7,
-                -1,
-                -1,
-                -4,
-                -3,
-                -2,
-                0,
-            ],  # P
-            [
-                1,
-                -1,
-                1,
-                0,
-                -1,
-                0,
-                0,
-                0,
-                -1,
-                -2,
-                -2,
-                0,
-                -1,
-                -2,
-                -1,
-                4,
-                1,
-                -3,
-                -2,
-                -2,
-                0,
-            ],  # S
-            [
-                0,
-                -1,
-                0,
-                -1,
-                -1,
-                -1,
-                -1,
-                -2,
-                -2,
-                -1,
-                -1,
-                -1,
-                -1,
-                -2,
-                -1,
-                1,
-                5,
-                -2,
-                -2,
-                0,
-                0,
-            ],  # T
-            [
-                -3,
-                -3,
-                -4,
-                -4,
-                -2,
-                -2,
-                -3,
-                -2,
-                -2,
-                -3,
-                -2,
-                -3,
-                -1,
-                1,
-                -4,
-                -3,
-                -2,
-                11,
-                2,
-                -3,
-                0,
-            ],  # W
-            [
-                -2,
-                -2,
-                -2,
-                -3,
-                -2,
-                -1,
-                -2,
-                -3,
-                2,
-                -1,
-                -1,
-                -2,
-                -1,
-                3,
-                -3,
-                -2,
-                -2,
-                2,
-                7,
-                -1,
-                0,
-            ],  # Y
-            [
-                0,
-                -3,
-                -3,
-                -3,
-                -1,
-                -2,
-                -2,
-                -3,
-                -3,
-                3,
-                1,
-                -2,
-                1,
-                -1,
-                -2,
-                -2,
-                0,
-                -3,
-                -1,
-                4,
-                0,
-            ],  # V
-            [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-            ],  # -
-        ]
-        AA = "ARNDCQEGHILKMFPSTWYV-"
-        myDict = {}
-        for i in range(len(AA)):
-            myDict[AA[i]] = i
-        maxValue, minValue = 11, -4
-        return (blosum62[myDict[a]][myDict[b]] - minValue) / (
-            maxValue - minValue
-        )
-
-    def CalculateDistance(self, sequence1, sequence2):
-        if len(sequence1) != len(sequence2):
-            self.error_msg = (
-                "KNN descriptor need fasta sequence with equal length."
-            )
-            return 1
-        distance = 1 - sum(
-            [
-                self.Sim(sequence1[i], sequence2[i])
-                for i in range(len(sequence1))
-            ]
-        ) / len(sequence1)
-        return distance
-
-    def CalculateContent(self, myDistance, j, myLabelSets):
-        content = []
-        myDict = {}
-        for i in myLabelSets:
-            myDict[i] = 0
-        for i in range(j):
-            myDict[myDistance[i][0]] = myDict[myDistance[i][0]] + 1
-        for i in myLabelSets:
-            content.append(myDict[myLabelSets[i]] / j)
-        return content
-
     def to_csv(self, file="encode.csv", index=False, header=False):
         try:
             self.encodings.to_csv(file, index=index, header=header)
@@ -6523,125 +5869,3 @@ class Calculator:
                 for fea in line:
                     f.write("%s," % fea)
                 f.write("yes\n")
-
-
-"""
-    def _KNN(self):
-        try:
-            # clear
-            self.encoding_array = np.array([])
-
-            if not self.is_equal:
-                self.error_msg = (
-                    "KNN descriptor need fasta sequence with equal length."
-                )
-                return False
-
-            topK_values = [
-                0.01,
-                0.02,
-                0.03,
-                0.04,
-                0.05,
-                0.06,
-                0.07,
-                0.08,
-                0.09,
-                0.10,
-                0.11,
-                0.12,
-                0.13,
-                0.14,
-                0.15,
-                0.16,
-                0.17,
-                0.18,
-                0.19,
-                0.20,
-                0.21,
-                0.22,
-                0.23,
-                0.24,
-                0.25,
-                0.26,
-                0.27,
-                0.28,
-                0.29,
-                0.30,
-            ]
-
-            training_data = []
-            training_label = {}
-            for i in self.seq_list:
-                if i[3] == "training":
-                    training_data.append(i)
-                    training_label[i[0]] = int(i[2])
-            tmp_label_sets = list(set(training_label.values()))
-
-            topK_numbers = []
-            for i in topK_values:
-                topK_numbers.append(math.ceil(len(training_data) * i))
-
-            # calculate pair distance
-            distance_dict = {}
-            for i in range(len(self.seq_list)):
-                name_seq1, sequence_1 = (
-                    self.seq_list[i][0],
-                    self.seq_list[i][1],
-                )
-                for j in range(i + 1, len(self.seq_list)):
-                    name_seq2, sequence_2 = (
-                        self.seq_list[j][0],
-                        self.seq_list[j][1],
-                    )
-                distance_dict[":".join(sorted([name_seq1, name_seq2]))] = (
-                    self.CalculateDistance(sequence_1, sequence_2)
-                )
-
-            encodings = []
-            header = ["sampleName"]
-            for k in topK_numbers:
-                for label in tmp_label_sets:
-                    header.append("Top" + str(k) + ".label" + str(label))
-            encodings.append(header)
-
-            for i in self.seq_list:
-                name = i[0]
-                code = [name]
-                tmp_distance_list = []
-                for j in range(len(training_data)):
-                    if name != training_data[j][0]:
-                        tmp_distance_list.append(
-                            [
-                                int(training_data[j][2]),
-                                distance_dict.get(
-                                    ":".join(
-                                        sorted([name, training_data[j][0]])
-                                    ),
-                                    1,
-                                ),
-                            ]
-                        )
-
-                tmp_distance_list = np.array(tmp_distance_list)
-                tmp_distance_list = tmp_distance_list[
-                    np.lexsort(tmp_distance_list.T)
-                ]
-
-                for j in topK_numbers:
-                    code += self.CalculateContent(
-                        tmp_distance_list, j, tmp_label_sets
-                    )
-                encodings.append(code)
-
-            encodings = np.array(encodings)
-            self.encodings = pd.DataFrame(
-                encodings[1:, 1:].astype(float),
-                columns=encodings[0, 1:],
-                index=encodings[1:, 0],
-            )
-            return True
-        except Exception as e:
-            sys.exit(f"Error: {e}")
-
-"""
