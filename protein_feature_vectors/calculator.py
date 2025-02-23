@@ -117,7 +117,7 @@ class Calculator:
         """
         fasta_sequences = []
         if not os.path.exists(self.fasta_file):
-            sys.exit(f"Error: cannot find file '{self.fasta_file}'")
+            sys.exit(f"Error: cannot find Fasta file '{self.fasta_file}'")
         for record in fastapy.parse(self.fasta_file):
             fasta_sequences.append([record.id, str(record.seq).upper()])
 
