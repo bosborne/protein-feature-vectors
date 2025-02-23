@@ -175,8 +175,7 @@ class Calculator:
                     descriptor
                 ][key]
         # Run the command
-        cmd = self.__cmd_dict[descriptor]
-        eval(cmd)
+        eval(self.__cmd_dict[descriptor])
         if len(self.encodings > 0):
             self.vector_length[descriptor] = self.encodings.shape[1]
             if self.verbose:
