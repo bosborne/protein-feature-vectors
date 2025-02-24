@@ -36,6 +36,7 @@ class Calculator:
     def __init__(self, verbose=False):
         self.verbose = verbose
         self.AA = "ACDEFGHIKLMNPQRSTVWY"
+        self.non_AA = "BJOUXZ-_"
         self.seq_list = list()
         self.vector_length = dict()
         self.datadir = os.path.join(
@@ -200,9 +201,8 @@ class Calculator:
         self.seq_list = validated
 
     def check_for_nonstandard(self, seqstr):
-        non_standard = set("BJOUXZ")
         # '&' is intersection
-        return set(seqstr) & non_standard
+        return set(seqstr) & set(self.non_AA)
 
     def display_feature_types(self):
         info = """        
