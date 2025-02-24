@@ -201,7 +201,19 @@ class Calculator:
         self.seq_list = validated
 
     def check_for_nonstandard(self, seqstr):
-        # '&' is intersection
+        """check_for_nonstandard
+        '&' is intersection
+
+        Parameters
+        ----------
+        seqstr : str
+            AA sequence
+
+        Returns
+        -------
+        set
+            Set of invalid characters
+        """
         return set(seqstr) & set(self.non_AA)
 
     def display_feature_types(self):
