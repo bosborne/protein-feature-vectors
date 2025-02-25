@@ -5843,21 +5843,21 @@ class Calculator:
         except Exception as e:
             sys.exit(f"Error: {e}")
 
-    def to_csv(self, file="encode.csv", index=False, header=False):
+    def to_csv(self, file="encodings.csv", index=False, header=False):
         try:
             self.encodings.to_csv(file, index=index, header=header)
         except Exception as e:
             sys.exit(f"Error: {e}")
         return True
 
-    def to_tsv(self, file="encode.tsv", index=False, header=False):
+    def to_tsv(self, file="encodings.tsv", index=False, header=False):
         try:
             self.encodings.to_csv(file, sep="\t", index=index, header=header)
         except Exception as e:
             sys.exit(f"Error: {e}")
         return True
 
-    def to_svm(self, file="encode.svm"):
+    def to_svm(self, file="encodings.svm"):
         try:
             with open(file, "w") as f:
                 for line in self.encodings.values:
@@ -5869,7 +5869,7 @@ class Calculator:
         except Exception as e:
             sys.exit(f"Error: {e}")
 
-    def to_arff(self, file="encode.arff"):
+    def to_arff(self, file="encodings.arff"):
         with open(file, "w") as f:
             f.write("@relation descriptor\n\n")
             for i in range(1, len(self.encodings.values[0]) + 1):
