@@ -30,10 +30,6 @@ calc = Calculator()
 calc.display_feature_types()
 calc.get_feature_vectors("CTriad", file='data_examples/multi.fa')
 print(calc.encodings)
-# Get ids and values from the DataFrame as Series objects
-protein_ids = [x[0] for x in calc.encodings.iterrows()]
-values = [x[1].tolist() for x in calc.encodings.iterrows()]
-calc.to_csv("CTriad.csv", index=True, header=True)
 ```
 
 Sequences from a dict:
@@ -43,6 +39,20 @@ from protein_feature_vectors import Calculator
 seqs = {"A1": "MLVTIKIQLKEAL...LDTGADVLEDM", "B2": "MHLPGKWMIGGIG....GFIKVRQYDEICGH"}
 calc = Calculator()
 calc.get_feature_vectors("CTriad", pdict=seqs)
+```
+
+Get ids and values from the *encodings* DataFrame as Series objects
+
+```python
+protein_ids = [x[0] for x in calc.encodings.iterrows()]
+values = [x[1].tolist() for x in calc.encodings.iterrows()]
+calc.to_csv("CTriad.csv", index=True, header=True)
+```
+
+Save data to a file
+
+```python
+calc.to_csv("CTriad.csv", index=True, header=True)
 ```
 
 ## Feature Vectors
