@@ -44,6 +44,7 @@ calc.get_feature_vectors("CTriad", pdict=seqs)
 Get ids and values from the *encodings* DataFrame as Series objects
 
 ```python
+calc.get_feature_vectors("CTriad", pdict=seqs)
 protein_ids = [x[0] for x in calc.encodings.iterrows()]
 values = [x[1].tolist() for x in calc.encodings.iterrows()]
 calc.to_csv("CTriad.csv", index=True, header=True)
@@ -52,6 +53,7 @@ calc.to_csv("CTriad.csv", index=True, header=True)
 Save data to a file
 
 ```python
+calc.get_feature_vectors("CTriad", pdict=seqs)
 calc.to_csv("CTriad.csv", index=True, header=True)
 ```
 
