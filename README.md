@@ -38,13 +38,13 @@ Sequences from a dict:
 from protein_feature_vectors import Calculator
 calc = Calculator()
 seqs = {"A1": "MLVTIKIQLKEAL...LDTGADVLEDM", "B2": "MHLPGKWMIGGIG....GFIKVRQYDEICGH"}
-calc.get_feature_vectors("CTriad", pdict=seqs)
+calc.get_feature_vectors("Moran", pdict=seqs)
 ```
 
 Get ids and values from the *encodings* DataFrame as Series objects
 
 ```python
-calc.get_feature_vectors("CTriad", pdict=seqs)
+calc.get_feature_vectors("CTDC", pdict=seqs)
 protein_ids = [x[0] for x in calc.encodings.iterrows()]
 values = [x[1].tolist() for x in calc.encodings.iterrows()]
 ```
@@ -52,8 +52,8 @@ values = [x[1].tolist() for x in calc.encodings.iterrows()]
 Save data to a file
 
 ```python
-calc.get_feature_vectors("CTriad", pdict=seqs)
-calc.to_csv("CTriad.csv", index=True, header=True)
+calc.get_feature_vectors("AAC", pdict=seqs)
+calc.to_csv("AAC.csv", index=True, header=True)
 ```
 
 ## Feature Vectors
