@@ -36,8 +36,8 @@ Sequences from a dict:
 
 ```python
 from protein_feature_vectors import Calculator
-seqs = {"A1": "MLVTIKIQLKEAL...LDTGADVLEDM", "B2": "MHLPGKWMIGGIG....GFIKVRQYDEICGH"}
 calc = Calculator()
+seqs = {"A1": "MLVTIKIQLKEAL...LDTGADVLEDM", "B2": "MHLPGKWMIGGIG....GFIKVRQYDEICGH"}
 calc.get_feature_vectors("CTriad", pdict=seqs)
 ```
 
